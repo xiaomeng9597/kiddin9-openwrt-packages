@@ -26,7 +26,6 @@
  	if(*p == '/')
  	{
  		const char * q = ++p;
-
 @@ -1014,7 +1014,7 @@ parselanaddr(struct lan_addr_s * lan_addr, const char * str, int debug_flag)
  				INIT_PRINT_ERR("Error parsing address : %s\n", lan_addr->ext_ip_str);
  				return -1;
