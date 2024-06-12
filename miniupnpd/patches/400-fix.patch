@@ -76,7 +76,7 @@
 
 --- a/miniupnpd.conf
 +++ b/miniupnpd.conf
-@@ -9,6 +9,10 @@
+@@ -9,6 +9,11 @@
  # Setting ext_ip is also useful in double NAT setup, you can declare here
  # the public IP address.
  #ext_ip=
