@@ -243,7 +243,7 @@ jobs:
         net/qBittorrent-static net/phtunnel net/frp \
         net/uugamebooster net/verysync net/vlmcsd net/dnsforwarder net/tcpping net/netatalk net/pgyvpn lang/golang
         git_sparse_clone openwrt-23.05 "https://github.com/openwrt/packages" "oppackages" \
-        utils/coremark utils/watchcat net/miniupnpd utils/dockerd utils/cgroupfs-mount net/uwsgi net/ddns-scripts net/smartdns net/curl \
+        utils/coremark utils/watchcat utils/dockerd utils/cgroupfs-mount net/uwsgi net/ddns-scripts net/smartdns net/curl \
         net/ariang net/rp-pppoe
         ) &
         (
