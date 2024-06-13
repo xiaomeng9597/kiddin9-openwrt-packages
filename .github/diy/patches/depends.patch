@@ -42,8 +42,8 @@
 -LUCI_DEPENDS:=
 +LUCI_DEPENDS:=+ua2f
  LUCI_PKGARCH:=all
- PKG_VERSION:=5.2
- PKG_RELEASE:=5
+ 
+ include $(TOPDIR)/feeds/luci/luci.mk
 
 --- a/firewall/Makefile
 +++ b/firewall/Makefile
