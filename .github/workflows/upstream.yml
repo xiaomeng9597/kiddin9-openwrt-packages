@@ -234,6 +234,8 @@ jobs:
         svn export https://github.com/openwrt/luci/branches/openwrt-22.03/applications/luci-app-wireguard
         svn export https://github.com/lucikap/Brukamen/trunk/luci-app-ua2f
         svn export https://github.com/HiGarfield/lede-17.01.4-Mod/trunk/package/extra/luci-app-openvpn-server
+        svn export https://github.com/jjm2473/packages/trunk/net/miniupnpd
+        svn export 
         ) &
         (
         git_sparse_clone master "https://github.com/coolsnowwolf/packages" "leanpkg" multimedia/UnblockNeteaseMusic-Go \
