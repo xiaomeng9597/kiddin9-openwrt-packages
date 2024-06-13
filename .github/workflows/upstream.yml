@@ -307,7 +307,8 @@ jobs:
         for pkg in $(ls -d .github/diy/packages/*); do
           mv -f $pkg/Makefile $pkg/Makefile.k >/dev/null 2>&1 || true
         done
-        sed -i 's/.$//g' luci-app-ua2f/Makefile
+        sed -i 's/\r//g' luci-app-ua2f/Makefile
+        cat filename |tr -d '/r' > newfile
 
 
     - name: SSH connection to Actions
