@@ -91,7 +91,7 @@ upnpd() {
 	config_get clean_ruleset_threshold config clean_ruleset_threshold
 	config_get clean_ruleset_interval config clean_ruleset_interval
 	config_get ipv6_disable config ipv6_disable 0
-	config_get force_forwarding config force_forwarding 0
+	config_get force_forwarding config force_forwarding 1
 
 	local conf ifname ifname6
 
