@@ -230,7 +230,7 @@ jobs:
         ) &
         (
         git_sparse_clone master "https://github.com/QiuSimons/OpenWrt-Add" "OpenWrt-Add" luci-app-irqbalance
-        git_sparse_clone main "https://github.com/lucikap/Brukamen" "ua2f" luci-app-ua2f
+        git_sparse_clone main "https://github.com/lucikap/Brukamen" "Brukamen" luci-app-ua2f
         git_sparse_clone  master "https://github.com/HiGarfield/lede-17.01.4-Mod" "HiGarfield" package/extra/luci-app-openvpn-server
         git_sparse_clone istoreos-22.03 "https://github.com/jjm2473/packages" "jjm2473" net/miniupnpd
         ) &
