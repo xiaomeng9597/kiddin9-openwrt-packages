@@ -308,7 +308,6 @@ jobs:
           mv -f $pkg/Makefile $pkg/Makefile.k >/dev/null 2>&1 || true
         done
         sed -i 's/\r//g' luci-app-ua2f/Makefile
-        cat filename |tr -d '/r' > newfile
 
 
     - name: SSH connection to Actions
