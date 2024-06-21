@@ -231,7 +231,7 @@ jobs:
         (
         git_sparse_clone master "https://github.com/QiuSimons/OpenWrt-Add" "OpenWrt-Add" luci-app-irqbalance
         git_sparse_clone main "https://github.com/lucikap/Brukamen" "Brukamen" luci-app-ua2f
-        git_sparse_clone  master "https://github.com/HiGarfield/lede-17.01.4-Mod" "HiGarfield" package/extra/luci-app-openvpn-server
+        git_sparse_clone master "https://github.com/HiGarfield/lede-17.01.4-Mod" "HiGarfield" package/extra/luci-app-openvpn-server
         git_sparse_clone istoreos-22.03 "https://github.com/jjm2473/packages" "jjm2473" net/miniupnpd
         ) &
         (
@@ -295,7 +295,7 @@ jobs:
     - name: Delete duplicated packages
       run: |
         shopt -s extglob
-        mv -n luciapp/!(luci-app-noddos|luci-app-cshark|luci-app-dnscrypt-proxy|luci-app-https-dns-proxy|luci-app-ssr-mudb-server|luci-app-ledtrig-*) ./ ; rm -Rf luciapp
+        mv -n luciapp/!(luci-app-noddos|luci-app-openvpn-server|luci-app-cshark|luci-app-dnscrypt-proxy|luci-app-https-dns-proxy|luci-app-ssr-mudb-server|luci-app-ledtrig-*) ./ ; rm -Rf luciapp
         mv -n lean/* ./ ; rm -Rf lean
         mv -n liep/* ./ ; rm -Rf liep
         mv -n openwrt-app-actions/applications/* ./;rm -rf openwrt-app-actions
