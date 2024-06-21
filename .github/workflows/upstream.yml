@@ -205,7 +205,7 @@ jobs:
         git_clone https://github.com/Ausaci/luci-app-nat6-helper
         git clone https://github.com/gngpp/luci-theme-design -b js --depth 1
         git_clone https://github.com/derisamedia/luci-theme-alpha
-        git_clone https://github.com/lazywalker/mmdvm-openwrt; rm -rf mmdvm-openwrt/misc; mvdir mmdvm-openwrt
+        git_clone https://github.com/lazywalker/mmdvm-openwrt && rm -rf mmdvm-openwrt/misc && mvdir mmdvm-openwrt
         ) &
         (
         git_clone https://github.com/BoringCat/luci-app-minieap
@@ -213,7 +213,7 @@ jobs:
         git_clone https://github.com/Diciya/luci-app-broadbandacc
         git_clone https://github.com/wiwizcom/WiFiPortal && mvdir WiFiPortal
         git_clone https://github.com/gSpotx2f/luci-app-internet-detector
-        git_clone https://github.com/vinewx/NanoHatOLED; mv NanoHatOLED/nanohatoled ./;rm -rf NanoHatOLED
+        git_clone https://github.com/vinewx/NanoHatOLED && mv NanoHatOLED/nanohatoled ./ && rm -rf NanoHatOLED
         git_clone https://github.com/zerolabnet/luci-app-torbp
         git_clone https://github.com/muink/luci-app-tinyfilemanager
         git_clone https://github.com/sbwml/luci-app-airconnect airconnect1 && mv airconnect1/* ./ && rm -rf airconnect1
