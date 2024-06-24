@@ -1,3 +1,5 @@
+#!/bin/sh
+
 /etc/init.d/wizard reconfig
 
 exit 0
