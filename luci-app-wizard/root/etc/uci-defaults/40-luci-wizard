@@ -1,3 +1,5 @@
+#!/bin/sh
+
 touch /etc/config/wizard
 
 uci -q batch <<-EOF >/dev/null
