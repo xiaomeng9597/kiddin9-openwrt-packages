@@ -1,8 +1,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mihomo
-PKG_VERSION:=1.18.5
-PKG_RELEASE:=7
+PKG_VERSION:=1.18.6
+PKG_RELEASE:=8
 PKG_BUILD_TIME=$(shell date -u -Iseconds)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -57,6 +57,7 @@ define Package/mihomo/install
 	$(INSTALL_BIN) $(CURDIR)/files/mihomo.init $(1)/etc/init.d/mihomo
 
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
+	$(INSTALL_BIN) $(CURDIR)/files/init.sh $(1)/etc/uci-defaults/99_init-mihomo
 	$(INSTALL_BIN) $(CURDIR)/files/migrate.sh $(1)/etc/uci-defaults/99_migrate-mihomo
 
 	$(INSTALL_DIR) $(1)/etc/capabilities
