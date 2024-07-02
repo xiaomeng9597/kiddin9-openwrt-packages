@@ -189,8 +189,6 @@ jobs:
         git_clone https://github.com/Erope/openwrt_nezha nezha && mvdir nezha
         ) &
         (
-        git_clone https://github.com/mchome/openwrt-dogcom
-        git_clone https://github.com/mchome/luci-app-dogcom
         git_clone https://github.com/koshev-msk/modemfeed && mv -n modemfeed/*/!(telephony)/* ./ && rm -rf modemfeed
         git_clone https://github.com/zzsj0928/luci-app-pushbot
         git_clone https://github.com/shanglanxin/luci-app-homebridge
