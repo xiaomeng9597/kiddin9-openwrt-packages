@@ -262,7 +262,6 @@ jobs:
         git_clone https://github.com/gSpotx2f/luci-app-interfaces-statistics
         git_clone https://github.com/gSpotx2f/luci-app-cpu-status-mini
         git_clone https://github.com/gSpotx2f/luci-app-cpu-status
-        git_clone https://github.com/animegasan/luci-app-ipinfo
         ) &
         (
         git_clone https://github.com/liudf0716/luci-app-yt-dlp
@@ -276,6 +275,9 @@ jobs:
         git_clone https://github.com/Akimio521/luci-app-gecoosac
         git_clone https://github.com/ilxp/luci-app-ikoolproxy
         git_clone https://github.com/animegasan/luci-app-droidnet
+        git_clone https://github.com/animegasan/luci-app-ipinfo
+        git_clone https://github.com/animegasan/luci-app-dnsleaktest
+        git_clone https://github.com/animegasan/luci-app-gpioled
       
         ) &
         (
@@ -283,8 +285,6 @@ jobs:
         git_clone https://github.com/ntlf9t/luci-app-dnspod
         git_clone https://github.com/lmq8267/luci-app-vnt
         git_clone https://github.com/RymFred11/luci-app-nettask nettask && mv nettask/luci-app-nettask ./;rm -rf nettask
-        git_clone https://github.com/animegasan/luci-app-ipinfo
-        git_clone https://github.com/animegasan/luci-app-dnsleaktest
         git_clone https://github.com/jarod360/luci-app-xupnpd
         git_clone https://github.com/fuqiang03/openwrt-caddy
         git_clone https://github.com/lmq8267/luci-app-caddy
@@ -299,7 +299,6 @@ jobs:
         git_clone https://github.com/wangqn/luci-app-nut
         git_clone https://github.com/CrazyPegasus/luci-app-accesscontrol-plus
         git_clone https://github.com/4IceG/luci-app-lite-watchdog
-        git_clone https://github.com/animegasan/luci-app-gpioled
         git_clone https://github.com/Mitsuhaxy/luci-app-miniproxy
         git_clone https://github.com/tkmsst/luci-app-cellularstatus cellularstatus && mv cellularstatus/luci/applications/* ./;rm -rf cellularstatus
         git_clone https://github.com/tracemouse/luci-app-coredns coredns && mv coredns/luci-app-coredns ./;rm -rf coredns
