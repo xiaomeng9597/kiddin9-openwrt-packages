@@ -301,6 +301,31 @@ jobs:
         git_clone https://github.com/Mitsuhaxy/luci-app-miniproxy
         git_clone https://github.com/tkmsst/luci-app-cellularstatus cellularstatus && mv cellularstatus/luci/applications/* ./;rm -rf cellularstatus
         git_clone https://github.com/tracemouse/luci-app-coredns coredns && mv coredns/luci-app-coredns ./;rm -rf coredns
+        git_clone https://github.com/arenekosreal/luci-app-nginx
+        git_clone https://github.com/zfdx123/luci-app-school
+        git_clone https://github.com/hczjxhdyz/luci-app-cns-server
+        git_clone https://github.com/tano-systems/luci-app-tn-lldpd
+        git_clone https://github.com/DRAWCORE/luci-app-qos-emong
+        git_clone https://github.com/wintbiit/luci-app-sakurafrp
+        git_clone https://github.com/ykxVK8yL5L/luci-app-taskschedule taskschedule && mvdir taskschedule
+        git_clone https://github.com/douo/luci-app-tinyfecvpn
+        ) &
+        (
+        git_clone https://github.com/ttimasdf/luci-app-jederproxy
+        git_clone https://github.com/ApeaSuperz/luci-app-cqustdotnet
+        git_clone https://github.com/shenyunet/luci-app-hypercpe
+        git_clone https://github.com/rafmilecki/luci-app-xjay
+        git_clone https://github.com/xcode75/luci-app-xclient
+        git_clone https://github.com/chenzhen6666/luci-app-mproxy mproxy && mvdir mproxy
+        git_clone https://github.com/a904055262/luci-app-ipv6clientfilter
+        git_clone https://github.com/mukaiu/luci-app-domain-proxy
+        git_clone https://github.com/danielaskdd/luci-app-smartvpn
+        git_clone https://github.com/Kodo-kakaku/luci-app-gpoint
+        git_clone https://github.com/hequan2017/luci-app-forcedata
+        git_clone https://github.com/Atomseek/luci-app-gxu-webconnect
+        git_clone https://github.com/sbwml/luci-app-openai
+        git_clone https://github.com/StriverLite/luci-app-nat6-helper
+        git_clone https://github.com/0x676e67/luci-app-wireguard-ui wireguardui && mvdir wireguardui
         ) &
         (
         git_sparse_clone master "https://github.com/QiuSimons/OpenWrt-Add" "OpenWrt-Add" luci-app-irqbalance
