@@ -319,7 +319,6 @@ jobs:
         git_clone https://github.com/a904055262/luci-app-ipv6clientfilter
         git_clone https://github.com/mukaiu/luci-app-domain-proxy
         git_clone https://github.com/danielaskdd/luci-app-smartvpn
-        git_clone https://github.com/Kodo-kakaku/luci-app-gpoint
         git_clone https://github.com/hequan2017/luci-app-forcedata
         git_clone https://github.com/Atomseek/luci-app-gxu-webconnect
         git_clone https://github.com/sbwml/luci-app-openai
