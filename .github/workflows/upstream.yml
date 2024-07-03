@@ -230,7 +230,7 @@ jobs:
         git_clone https://github.com/QiuSimons/luci-app-daed-next daed1 && mvdir daed1
         git_clone https://github.com/sirpdboy/luci-app-netdata
         git_clone https://github.com/sirpdboy/luci-app-chatgpt-web
-        git_clone https://github.com/sirpdboy/luci-app-eqosplus && rm -rf luci-app-eqosplus/po/zh_Hans
+        git_clone https://github.com/sirpdboy/luci-app-eqosplus
         git_clone https://github.com/JiaY-shi/fancontrol fanc && mvdir fanc
         git_clone https://github.com/Siriling/5G-Modem-Support Modem && mvdir Modem;rm -rf rooter
         git_clone https://github.com/danchexiaoyang/luci-app-syncthing
@@ -480,7 +480,6 @@ jobs:
         ) &
 
         (
-        rm -rf luci-app-partexp/po/zh_Hans
         bash .github/diy/create_acl_for_luci.sh -a >/dev/null 2>&1 || true
         bash .github/diy/convert_translation.sh -a >/dev/null 2>&1 || true
         
