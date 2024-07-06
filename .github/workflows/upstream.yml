@@ -262,7 +262,7 @@ jobs:
         git_clone https://github.com/gSpotx2f/luci-app-cpu-status
         git_clone https://github.com/Carseason/openwrt-packages Carseason && mv -n Carseason/*/* ./;mv services/routergo ./;rm -rf Carseason
         git_clone https://github.com/Carseason/openwrt-themedog && openwrt-themedog/luci/* ./;rm -rf openwrt-themedog
-        git_clone https://github.com/Carseason/openwrt-app-actions && mv -n openwrt-app-actions/applications/* ./;rm -rf openwrt-app-actions
+        git_clone https://github.com/Carseason/openwrt-app-actions Carseason && mv -n Carseason/applications/* ./;rm -rf Carseason
         ) &
         (
         git_clone https://github.com/liudf0716/luci-app-yt-dlp
