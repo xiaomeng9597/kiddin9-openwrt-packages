@@ -325,7 +325,6 @@ jobs:
         git_clone https://github.com/hequan2017/luci-app-forcedata
         git_clone https://github.com/Atomseek/luci-app-gxu-webconnect
         git_clone https://github.com/sbwml/luci-app-openai
-        git_clone https://github.com/sbwml/packages_lang_golang golang
         # git_clone https://github.com/0x676e67/luci-app-wireguard-ui wireguardui && mvdir wireguardui
         ) &
         (
