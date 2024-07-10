@@ -325,6 +325,7 @@ jobs:
         git_clone https://github.com/hequan2017/luci-app-forcedata
         git_clone https://github.com/Atomseek/luci-app-gxu-webconnect
         git_clone https://github.com/sbwml/luci-app-openai
+        git_clone https://github.com/sbwml/packages_lang_golang golang
         # git_clone https://github.com/0x676e67/luci-app-wireguard-ui wireguardui && mvdir wireguardui
         ) &
         (
@@ -337,7 +338,7 @@ jobs:
         git_sparse_clone master "https://github.com/coolsnowwolf/packages" "leanpkg" multimedia/UnblockNeteaseMusic-Go \
         multimedia/UnblockNeteaseMusic net/amule net/softethervpn5 net/antileech multimedia/gmediarender net/go-aliyundrive-webdav \
         net/qBittorrent-static net/phtunnel net/frp net/headscale \
-        net/uugamebooster net/verysync net/vlmcsd net/dnsforwarder net/tcpping net/netatalk net/pgyvpn lang/golang
+        net/uugamebooster net/verysync net/vlmcsd net/dnsforwarder net/tcpping net/netatalk net/pgyvpn
         git_sparse_clone openwrt-23.05 "https://github.com/openwrt/packages" "oppackages" \
         utils/coremark utils/watchcat utils/dockerd utils/cgroupfs-mount net/uwsgi net/ddns-scripts net/smartdns net/curl \
         net/ariang net/rp-pppoe net/tailscale
