@@ -62,13 +62,18 @@ jobs:
         function git_sparse_clone() {
         trap 'rm -rf "$tmpdir"' EXIT
         branch="$1" curl="$2" && shift 2
+        rootdir="$PWD"
         tmpdir="$(mktemp -d)" || exit 1
         git clone -b "$branch" --depth 1 --filter=blob:none --sparse "$curl" "$tmpdir"
+        if [ "$?" != 0 ]; then
+            echo "error on $curl"
+            exit 1
+        fi
         cd "$tmpdir"
         git sparse-checkout init --cone
         git sparse-checkout set "$@"
-        mv -n $@ ../ || true
-        cd ..
+        mv -n $@ $rootdir/ || true
+        cd $rootdir
         }
         function mvdir() {
         mv -n `find $1/* -maxdepth 0 -type d` ./
