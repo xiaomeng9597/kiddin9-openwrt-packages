@@ -1,3 +1,18 @@
+--- a/luci-app-passwall2/root/etc/uci-defaults/luci-passwall2
++++ b/luci-app-passwall2/root/etc/uci-defaults/luci-passwall2
+@@ -36,6 +36,11 @@ touch /etc/config/passwall2_show >/dev/null 2>&1
+ 
+ chmod +x /usr/share/passwall2/*.sh
+ 
++[ "`which nft`" ] && {
++uci -q set passwall2.@global_forwarding[0].use_nft=1
++uci -q commit passwall2
++}
++
+ rm -f /tmp/luci-indexcache
+ rm -rf /tmp/luci-modulecache/
+ killall -HUP rpcd 2>/dev/null
+
 --- a/luci-app-passwall2/Makefile
 +++ b/luci-app-passwall2/Makefile
 @@ -32,6 +32,30 @@ LUCI_DEPENDS:=+coreutils +coreutils-base64 +coreutils-nohup +curl \
