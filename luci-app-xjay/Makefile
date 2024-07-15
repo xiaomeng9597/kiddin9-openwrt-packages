@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-xjay
 PKG_VERSION:=1.3.1
-PKG_RELEASE:=2
+PKG_RELEASE:=3
 
 PKG_LICENSE:=MPLv2
 PKG_LICENSE_FILES:=LICENSE
@@ -16,7 +16,7 @@ define Package/$(PKG_NAME)
 	CATEGORY:=Extra packages
 	TITLE:=LuCI Support for Xray
 	DEPENDS:=+luci-base +xray-core +xray-geodata +jsonfilter \
-	DEPENDS:=+PACKAGE_XRAY_INCLUDE_IPTABLES_SUPPORT:kmod-nft-tproxy \
+		 +PACKAGE_XRAY_INCLUDE_IPTABLES_SUPPORT:kmod-nft-tproxy \
 		 +PACKAGE_XRAY_INCLUDE_IPTABLES_SUPPORT:kmod-nft-socket
 	PKGARCH:=all
 endef
