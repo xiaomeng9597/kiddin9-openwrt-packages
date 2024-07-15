@@ -6,7 +6,7 @@
  	TITLE:=LuCI Support for Xray
 -	DEPENDS:=+luci-base +xray-core +xray-geodata +jsonfilter
 +	DEPENDS:=+luci-base +xray-core +xray-geodata +jsonfilter \
-+	DEPENDS:=+PACKAGE_XRAY_INCLUDE_IPTABLES_SUPPORT:kmod-nft-tproxy \
++		 +PACKAGE_XRAY_INCLUDE_IPTABLES_SUPPORT:kmod-nft-tproxy \
 +		 +PACKAGE_XRAY_INCLUDE_IPTABLES_SUPPORT:kmod-nft-socket
  	PKGARCH:=all
  endef
