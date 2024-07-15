@@ -168,6 +168,8 @@ jobs:
         git_clone https://github.com/linkease/openwrt-app-actions
         git_clone https://github.com/lucikap/luci-app-brukamen && mv -n luci-app-brukamen/{luci*,dogcom,mentohust,iii/*} ./;rm -rf luci-app-brukamen
         git_clone https://github.com/mchome/openwrt-dogcom
+        git_clone https://github.com/yichya/luci-app-xray yichya && mv -f yichya/status ./luci-app-xray-status;mv -f yichya/core ./luci-app-xray
+        git_clone https://github.com/rafmilecki/luci-app-xjay
         ) &
         (
         git_clone https://github.com/honwen/luci-app-aliddns
