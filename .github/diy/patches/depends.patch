@@ -67,7 +67,7 @@
  	+nftables-json \
 -	+ucode +ucode-mod-fs +ucode-mod-ubus +ucode-mod-uci
 +	+ucode +ucode-mod-fs +ucode-mod-ubus +ucode-mod-uci \
-+	+kmod-nft-fullcone +iptables-nft +ip6tables-nft +arptables-nft +ebtables-nft +miniupnpd-nftables +kmod-nft-offload +kmod-nft-fullcone
++	+kmod-nft-fullcone +iptables-nft +ip6tables-nft +miniupnpd-nftables +kmod-nft-offload +kmod-nft-fullcone
    EXTRA_DEPENDS:=ucode (>= 2022-03-22)
    PROVIDES:=uci-firewall
  endef
