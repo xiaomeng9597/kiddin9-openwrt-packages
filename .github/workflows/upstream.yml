@@ -518,7 +518,7 @@ jobs:
           -e 's/+docker\( \|$\)/+docker +dockerd /g' \
           -e 's/+iptables\( \|$\)//g' \
           -e 's/URL:=@IMMORTALWRT/URL:=https:\/\/mirror2.immortalwrt.org\/sources/g' \
-          */Makefile
+          !(dockerd)/Makefile
         ) &
         
         while [[ ! -f /tmp/ok ||  ! -f /tmp/ok2 ]]; do
