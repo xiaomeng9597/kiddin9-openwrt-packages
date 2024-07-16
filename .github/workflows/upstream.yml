@@ -516,8 +516,10 @@ jobs:
           -e 's/+ca-certificates/+ca-bundle/' \
           -e 's/php7/php8/g' \
           -e 's/+docker\( \|$\)/+docker +dockerd /g' \
-          -e 's/+iptables\( \|$\)//g' \
           -e 's/URL:=@IMMORTALWRT/URL:=https:\/\/mirror2.immortalwrt.org\/sources/g' \
+          */Makefile
+          sed -i \
+          -e 's/+iptables\( \|$\)//g' \
           !(dockerd)/Makefile
         ) &
         
