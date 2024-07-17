@@ -14,7 +14,8 @@
 +define Package/dnsmasq-full/extra_provides
 +    echo "libnftables.so.1"; \
 +    echo "libjansson.so.4"; \
-+    echo "libnftnl.so.11";
++    echo "libnftnl.so.11"; \
++    echo "libmnl.so.0";
 +endef
 +
  define Package/dnsmasq/description
