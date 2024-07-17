@@ -1,6 +1,6 @@
 --- a/dnsmasq/Makefile
 +++ b/dnsmasq/Makefile
-@@ -66,12 +66,17 @@ $(call Package/dnsmasq/Default)
+@@ -66,12 +66,18 @@ $(call Package/dnsmasq/Default)
    TITLE += (with DNSSEC, DHCPv6, Auth DNS, IPset, Nftset, Conntrack, NO_ID enabled by default)
    DEPENDS+=+PACKAGE_dnsmasq_full_dnssec:libnettle \
  	+PACKAGE_dnsmasq_full_ipset:kmod-ipt-ipset \
