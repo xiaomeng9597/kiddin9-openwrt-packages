@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=dnsmasq
 PKG_UPSTREAM_VERSION:=2.90
 PKG_VERSION:=$(subst test,~~test,$(subst rc,~rc,$(PKG_UPSTREAM_VERSION)))
-PKG_RELEASE:=45
+PKG_RELEASE:=46
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_UPSTREAM_VERSION).tar.xz
 PKG_SOURCE_URL:=https://thekelleys.org.uk/dnsmasq/
@@ -74,8 +74,7 @@ endef
 define Package/dnsmasq-full/extra_provides
     echo "libnftables.so.1"; \
     echo "libjansson.so.4"; \
-    echo "libnftnl.so.11"; \
-    echo "libmnl.so.0";
+    echo "libnftnl.so.11";
 endef
 
 define Package/dnsmasq/description
