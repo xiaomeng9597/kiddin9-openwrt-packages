@@ -8,7 +8,7 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=r8168
 PKG_VERSION:=8.053.00
-PKG_RELEASE:=36
+PKG_RELEASE:=37
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mtorromeo/r8168/tar.gz/$(PKG_VERSION)?
@@ -36,7 +36,7 @@ endef
 define Build/Compile
 	+$(KERNEL_MAKE) $(PKG_JOBS) \
 		M=$(PKG_BUILD_DIR)/src \
-		CONFIG_RSS_SUPPORT=y \
+		ENABLE_RSS_SUPPORT=y \
 		modules
 endef
 
