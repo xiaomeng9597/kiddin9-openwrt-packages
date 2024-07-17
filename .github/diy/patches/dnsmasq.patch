@@ -1,5 +1,5 @@
---- a/package/network/services/dnsmasq/Makefile
-+++ b/package/network/services/dnsmasq/Makefile
+--- a/dnsmasq/Makefile
++++ b/dnsmasq/Makefile
 @@ -22,6 +22,8 @@ PKG_CPE_ID:=cpe:/a:thekelleys:dnsmasq
  
  PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_UPSTREAM_VERSION)
