@@ -369,7 +369,8 @@ jobs:
         git_sparse_clone master "https://github.com/immortalwrt/immortalwrt" \
         package/kernel/r8168 package/kernel/r8125 package/kernel/rtl8189es package/emortal/autocore package/emortal/automount \
         package/network/utils/fullconenat package/emortal/cpufreq package/network/utils/fullconenat-nft package/network/utils/nftables \
-        package/utils/mhz package/libs/libnftnl package/firmware/wireless-regdb
+        package/network/config/firewall package/network/config/firewall4 \
+        package/utils/mhz package/libs/libnftnl package/firmware/wireless-regdb 
         ) &
         (
         git_sparse_clone master "https://github.com/x-wrt/com.x-wrt" luci-app-macvlan luci-app-xwan
