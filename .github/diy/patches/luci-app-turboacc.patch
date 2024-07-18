@@ -69,7 +69,7 @@
 -dns_caching_mode = s:option(ListValue, "dns_caching_mode", translate("Resolve DNS Mode"), translate("DNS Program"))
 -if nixio.fs.access("/usr/sbin/pdnsd") then
 -dns_caching_mode:value("1", translate("Using PDNSD to query and cache"))
-+if nixio.fs.access("/usr/sbin/nft")
++if nixio.fs.access("/usr/sbin/nft") then
 +fullcone_nat6 = s:option(Flag, "fullcone_nat6", translate("FullCone NAT6"))
 +fullcone_nat6.default = 0
 +fullcone_nat6.description = translate("Using FullCone NAT6 can improve gaming performance effectively")
