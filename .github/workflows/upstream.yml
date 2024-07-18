@@ -261,10 +261,7 @@ jobs:
         ) &
         (
         git_clone https://github.com/liudf0716/luci-app-yt-dlp
-        git_clone https://github.com/liudf0716/luci-app-ss-redir
         git_clone https://github.com/liudf0716/luci-app-kcptun
-        git_clone https://github.com/liudf0716/luci-app-whispercpp
-        git_clone https://github.com/liudf0716/whispercpp
         git_clone https://github.com/liudf0716/luci-app-xfrpc
         git_clone https://github.com/liudf0716/luci-app-apfree-wifidog
         git_clone https://github.com/liudf0716/actions-apfree-wifidog && mv actions-apfree-wifidog/apfree-wifidog ./; rm -rf actions-apfree-wifidog
