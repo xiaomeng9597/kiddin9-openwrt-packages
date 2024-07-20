@@ -9,7 +9,7 @@
 <a href="https://github.com/lmq8267/luci-app-vnt/actions?query=workflow%3ABuild"><img src="https://img.shields.io/github/actions/workflow/status/lmq8267/luci-app-vnt/build.yml?branch=main" alt="Build status"/></a
 </p>
 
-项目地址：https://github.com/lbl8603/vnt
+项目地址：https://github.com/vnt-dev/vnt
 
 非专业，编写自用，有大佬完善一下也好，自1.2.9版本起可以多开了，要是有大佬重写一个可以支持多开、多配置快速切换 就好啦，多配置快速切换
 
