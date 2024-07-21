@@ -1,3 +1,15 @@
+--- a/luci-app-routerdog/Makefile
++++ b/luci-app-routerdog/Makefile
+@@ -7,7 +7,7 @@
+ include $(TOPDIR)/rules.mk
+ 
+ LUCI_TITLE:=RouterDog
+-LUCI_DEPENDS:=+routergo +luci-app-store +luci-lib-taskd
++LUCI_DEPENDS:=+routergo +luci-app-store +luci-app-linkease +luci-lib-taskd
+ LUCI_MINIFY_CSS:=0
+ LUCI_MINIFY_JS:=0
+
+
 --- a/luci-app-routerdog/luasrc/controller/routerdog.lua
 +++ b/luci-app-routerdog/luasrc/controller/routerdog.lua
 @@ -2,7 +2,7 @@ module("luci.controller.routerdog", package.seeall)
