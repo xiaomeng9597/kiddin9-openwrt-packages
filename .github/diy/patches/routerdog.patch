@@ -1,14 +1,14 @@
---- a/luci-app-routerdog/Makefile
-+++ b/luci-app-routerdog/Makefile
-@@ -7,7 +7,7 @@
- include $(TOPDIR)/rules.mk
+--- a/network/services/routergo/Makefile
++++ b/network/services/routergo/Makefile
+@@ -27,7 +27,7 @@ define Package/$(PKG_NAME)
+ 	CATEGORY:=Network
+ 	SUBMENU:=Web Servers/Proxies
+ 	TITLE:=RouterGo
+-	DEPENDS:=@(x86_64||aarch64||arm) +docker
++	DEPENDS:=@(x86_64||aarch64||arm) +docker +luci-app-linkease
+ 	URL:=https://github.com/Carseason/openwrt-packages
+ endef
  
- LUCI_TITLE:=RouterDog
--LUCI_DEPENDS:=+routergo +luci-app-store +luci-lib-taskd
-+LUCI_DEPENDS:=+routergo +luci-app-store +luci-app-linkease +luci-lib-taskd
- LUCI_MINIFY_CSS:=0
- LUCI_MINIFY_JS:=0
-
 
 --- a/luci-app-routerdog/luasrc/controller/routerdog.lua
 +++ b/luci-app-routerdog/luasrc/controller/routerdog.lua
