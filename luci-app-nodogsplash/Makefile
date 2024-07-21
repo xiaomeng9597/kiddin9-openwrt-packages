@@ -9,6 +9,7 @@ LUCI_TITLE:=LuCI support for nodogsplash
 LUCI_DEPENDS:=+nodogsplash +luci-base
 LUCI_PKGARCH:=all
 PKG_NAME:=luci-app-nodogsplash
+PKG_MAINTAINER:=Douglas Orend <doug.orend2@gmail.com>
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
