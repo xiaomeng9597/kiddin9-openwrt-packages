@@ -1,5 +1,5 @@
---- a/network/services/routergo/Makefile
-+++ b/network/services/routergo/Makefile
+--- a/routergo/Makefile
++++ b/routergo/Makefile
 @@ -27,7 +27,7 @@ define Package/$(PKG_NAME)
  	CATEGORY:=Network
  	SUBMENU:=Web Servers/Proxies
