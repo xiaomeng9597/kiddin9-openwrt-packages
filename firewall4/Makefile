@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=firewall4
-PKG_RELEASE:=31
+PKG_RELEASE:=32
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/firewall4.git
@@ -39,10 +39,13 @@ endef
 define Package/firewall4/conffiles
 /etc/config/firewall
 /etc/nftables.d/
+/etc/firewall.include
 endef
 
 define Package/firewall4/install
 	$(CP) -a $(PKG_BUILD_DIR)/root/* $(1)/
+	$(INSTALL_DIR) $(1)/etc/
+	$(INSTALL_CONF) ./files/firewall.include $(1)/etc/firewall.include
 endef
 
 define Build/Compile
