@@ -45,17 +45,23 @@
  
  	if [ "$mode" -gt 0 ] ; then
  		ifdashname="${ifname//./-}"
-@@ -1173,6 +1190,14 @@ dnsmasq_start()
+@@ -1173,6 +1190,20 @@ dnsmasq_start()
  	esac
  
  	procd_close_instance
 +	config_get_bool dns_redirect "$cfg" dns_redirect 0
 +	config_get dns_port "$cfg" port 53
 +	if [ "$dns_redirect" = 1 ]; then
++	if [ -n "$(command -v nft)" ]; then
++		nft add table inet dnsmasq
++		nft add chain inet dnsmasq prerouting "{ type nat hook prerouting priority -105; policy accept; }"
++		nft add rule inet dnsmasq prerouting "meta nfproto { ipv4, ipv6 } udp dport 53 counter redirect to :$dns_port comment \"DNSMASQ HIJACK\""
++	else
 +		iptables -t nat -A PREROUTING -m comment --comment "DNSMASQ" -p udp --dport 53 -j REDIRECT --to-ports $dns_port
 +		iptables -t nat -A PREROUTING -m comment --comment "DNSMASQ" -p tcp --dport 53 -j REDIRECT --to-ports $dns_port
 +		[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -m comment --comment "DNSMASQ" -p udp --dport 53 -j REDIRECT --to-ports $dns_port
 +		[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -m comment --comment "DNSMASQ" -p tcp --dport 53 -j REDIRECT --to-ports $dns_port
++	fi
 +	fi
  }
  
