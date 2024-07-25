@@ -258,6 +258,7 @@ jobs:
         git_clone https://github.com/Carseason/openwrt-packages Carseason && mv -n Carseason/*/* ./;mv services/routergo ./;rm -rf Carseason
         git_clone https://github.com/Carseason/openwrt-themedog && mv -n openwrt-themedog/luci/* ./;rm -rf openwrt-themedog
         git_clone https://github.com/Carseason/openwrt-app-actions Carseason && mv -n Carseason/applications/* ./;rm -rf Carseason
+        git_clone https://github.com/VergilGao/openwrt-sblite && mvdir openwrt-sblite
         ) &
         (
         git_clone https://github.com/liudf0716/luci-app-yt-dlp
@@ -271,7 +272,7 @@ jobs:
         git_clone https://github.com/animegasan/luci-app-ipinfo
         git_clone https://github.com/animegasan/luci-app-dnsleaktest
         git_clone https://github.com/animegasan/luci-app-gpioled
-      
+        git_clone https://github.com/hingbong/hickory-dns-openwrt && mvdir hickory-dns-openwrt
         ) &
         (
         git_clone https://github.com/EasyTier/luci-app-easytier
