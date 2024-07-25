@@ -66,7 +66,7 @@
  }
  
  dnsmasq_stop()
-@@ -1190,6 +1215,15 @@ dnsmasq_stop()
+@@ -1190,6 +1215,21 @@ dnsmasq_stop()
  	rm -f ${BASEDHCPSTAMPFILE}.${cfg}.*.dhcp
  }
  
@@ -79,6 +79,12 @@
 +	[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -D PREROUTING -m comment --comment "DNSMASQ" -p tcp --dport 53 -j REDIRECT --to-ports $dns_port 2>"/dev/null"
 +}
 +
++nftables_clear()
++{
++	! nft --check list table inet dnsmasq > "/dev/null" 2>&1 || \
++		nft delete table inet dnsmasq
++}
++
  add_interface_trigger()
  {
  	local interface ignore
@@ -86,7 +92,7 @@
  }
  
  reload_service() {
-+	iptables_clear
++	[ -n "$(command -v nft)" ] && nftables_clear || iptables_clear
  	rc_procd start_service "$@"
  	procd_send_signal dnsmasq "$@"
  }
@@ -94,5 +100,5 @@
  	else
  		config_foreach dnsmasq_stop dnsmasq
  	fi
-+	iptables_clear
++	[ -n "$(command -v nft)" ] && nftables_clear || iptables_clear
  }
