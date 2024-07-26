@@ -149,7 +149,6 @@ sethttps() {
 	         uci -q set uhttpd.main.redirect_https='1'
 	         uci commit uhttpd
 	         /etc/init.d/uhttpd reload
-	    }
     	fi
     else
         if [ -n "$(command -v nginx)" ]; then
