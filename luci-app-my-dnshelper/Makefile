@@ -6,7 +6,6 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-my-dnshelper
-PKG_VERSION:=1.1
 
 PKG_LICENSE:=GPLv2
 LUCI_URL:=https://github.com/kongfl888/openwrt-my-dnshelper
