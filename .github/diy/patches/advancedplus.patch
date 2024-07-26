@@ -1,6 +1,6 @@
 --- a/luci-app-advancedplus/root/etc/init.d/advancedplus
 +++ b/luci-app-advancedplus/root/etc/init.d/advancedplus
-@@ -137,24 +137,34 @@ else
+@@ -137,24 +137,33 @@ else
  fi
  }
  sethttps() {
@@ -22,8 +22,8 @@
 +	         uci -q set uhttpd.main.redirect_https='1'
  	         uci commit uhttpd
 -	         /etc/init.d/uhttpd restart
+-	    }
 +	         /etc/init.d/uhttpd reload
- 	    }
 +    	fi
      else
 -        [  $uhttp ] && 
@@ -49,7 +49,7 @@
      fi
  }
  
-@@ -233,8 +243,10 @@ tsoset
+@@ -233,8 +242,10 @@ tsoset
      fi
      #cpumode=`uci -q get advancedplus.@basic[0].cpumode`
      #[ ! $cpumode ] || cpumodeset $cpumode   /usr/bin/zsh
