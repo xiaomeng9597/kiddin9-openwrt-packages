@@ -218,7 +218,6 @@ jobs:
         git_clone https://github.com/openwrtdiy/luci-app-pppoe-user
         git_clone https://github.com/derisamedia/luci-theme-alpha
         git_clone https://github.com/animegasan/luci-app-alpha-config
-        git_clone https://github.com/kongfl888/openwrt-my-dnshelper
         ) &
         (
         git clone https://github.com/sirpdboy/luci-theme-kucat -b js --depth 1
