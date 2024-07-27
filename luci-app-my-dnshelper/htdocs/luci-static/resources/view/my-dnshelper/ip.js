@@ -28,7 +28,7 @@ return L.view.extend({
 
 	handleSave: function(ev) {
 		var map = document.querySelector('#ips_list');
-		return fs.write('/etc/my-dnshelper/bootstrap.mdhp', map.value.trim().replace(/\r\n/g, '\n') + '\n');
+		return fs.write('/etc/my-dnshelper/ip.mdhp', map.value.trim().replace(/\r\n/g, '\n') + '\n');
 	},
 
 	addFooter: function() {
