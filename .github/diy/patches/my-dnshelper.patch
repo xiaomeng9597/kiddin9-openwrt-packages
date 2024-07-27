@@ -97,12 +97,13 @@
 -}
 -
  clear_iprule(){
- 	sleep 1s
+-	sleep 1s
 -	iptables -w 2 -D FORWARD -m set --match-set myipdrop dst -m comment --comment "$TAG" -j DROP 2>/dev/null
 -	iptables -w 2 -D OUTPUT -m set --match-set myipdrop dst -m comment --comment "$TAG" -j DROP 2>/dev/null
 -	which ipset >/dev/null && ipset destroy myipdrop 2>/dev/null
 -	rm -f $bgsconf
 -	init_fwi
++	fw4 reload
 +	if [ -n "$(command -v nft)" ]; then
 +		nft flush set inet fw4 myipdrop 2>/dev/null
 +		nft delete set inet fw4 myipdrop 2>/dev/null
