@@ -333,7 +333,7 @@ jobs:
         net/qBittorrent-static net/phtunnel net/frp net/headscale \
         net/uugamebooster net/verysync net/vlmcsd net/dnsforwarder net/tcpping net/netatalk net/pgyvpn
         git_sparse_clone openwrt-23.05 "https://github.com/openwrt/packages" \
-        utils/coremark utils/watchcat utils/dockerd utils/cgroupfs-mount net/uwsgi net/ddns-scripts net/smartdns net/curl \
+        utils/coremark utils/watchcat utils/dockerd utils/cgroupfs-mount net/uwsgi net/p910nd net/ddns-scripts net/smartdns net/curl \
         net/ariang net/rp-pppoe net/tailscale
         ) &
         (
