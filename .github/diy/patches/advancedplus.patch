@@ -1,11 +1,19 @@
 --- a/luci-app-advancedplus/root/etc/init.d/advancedplus
 +++ b/luci-app-advancedplus/root/etc/init.d/advancedplus
-@@ -137,37 +137,44 @@ else
+@@ -137,24 +137,44 @@ else
  fi
  }
  sethttps() {
+-    uhttp=`uci -q get uhttpd.main.listen_https | awk -F ' ' '{printf $1}'`
 -    if [ "x$(uci -q get advancedplus.@basic[0].uhttps)" = "x1" ] ; then
--    	if [ -n "$(command -v nginx)" ]; then
+-	     [  $uhttp ] || {
+-	         sed -i "/listen_https/d" /etc/config/uhttpd
+-	         /etc/init.d/uhttpd stop
+-	         uci -q add_list uhttpd.main.listen_https='0.0.0.0:443'
+-	         uci -q add_list uhttpd.main.listen_https='[::]:443'
+-	         uci commit uhttpd
+-	         /etc/init.d/uhttpd restart
+-	    }
 +	if [ -n "$(command -v nginx)" ]; then
 +		if [ -z "`uci -q get nginx.default_server`" ]; then
 +			uci -q set nginx.default_server=server
@@ -20,44 +28,49 @@
 +			uci -q set nginx._redirect2ssl.access_log='off; # logd openwrt'
 +		fi
 +    	if [ "x$(uci -q get advancedplus.@basic[0].uhttps)" = "x1" ] ; then
-     		uci -q del nginx.default_server.listen
-     		uci -q add_list nginx.default_server.listen='80'
-     		uci -q add_list nginx.default_server.listen='[::]:80'
-     		uci -q del nginx._redirect2ssl.listen
-     		uci -q add_list nginx._redirect2ssl.listen='80 default_server'
-     		uci -q add_list nginx._redirect2ssl.listen='[::]:80 default_server'
--    		uci commit nginx
--    		/etc/init.d/nginx reload
-     	else
--	         uci -q set uhttpd.main.redirect_https='1'
--	         uci commit uhttpd
--	         /etc/init.d/uhttpd reload
--    	fi
--    else
--        if [ -n "$(command -v nginx)" ]; then
- 	         uci -q del nginx._redirect2ssl.listen
- 	         uci -q add_list nginx._redirect2ssl.listen='80'
- 	         uci -q add_list nginx._redirect2ssl.listen='[::]:80'
- 	         uci -q del nginx.default_server.listen
- 	         uci -q add_list nginx.default_server.listen='80 default_server'
- 	         uci -q add_list nginx.default_server.listen='[::]:80 default_server'
--	         uci commit nginx
--	         sed -i 's/	option return/	# option return/' /etc/config/nginx
--	         /etc/init.d/nginx reload
++    		uci -q del nginx.default_server.listen
++    		uci -q add_list nginx.default_server.listen='80'
++    		uci -q add_list nginx.default_server.listen='[::]:80'
++    		uci -q del nginx._redirect2ssl.listen
++    		uci -q add_list nginx._redirect2ssl.listen='80 default_server'
++    		uci -q add_list nginx._redirect2ssl.listen='[::]:80 default_server'
++    	else
++	         uci -q del nginx._redirect2ssl.listen
++	         uci -q add_list nginx._redirect2ssl.listen='80'
++	         uci -q add_list nginx._redirect2ssl.listen='[::]:80'
++	         uci -q del nginx.default_server.listen
++	         uci -q add_list nginx.default_server.listen='80 default_server'
++	         uci -q add_list nginx.default_server.listen='[::]:80 default_server'
 +    	fi
 +		uci commit nginx
 +    	/etc/init.d/nginx reload
-+    else
+     else
+-        [  $uhttp ] && 
+-	{  
+-	     /etc/init.d/uhttpd stop
+-	    sed -i "/listen_https/d" /etc/config/uhttpd
+-	    uci commit uhttpd
+-	    /etc/init.d/uhttpd restart
+-	}
 +        if [ "x$(uci -q get advancedplus.@basic[0].uhttps)" = "x1" ] ; then
 +	         uci -q set uhttpd.main.redirect_https='1'
- 		else
- 	         uci -q set uhttpd.main.redirect_https='0'
--	         uci commit uhttpd
--	         /etc/init.d/uhttpd reload
-         fi
++		else
++	         uci -q set uhttpd.main.redirect_https='0'
++        fi
 +		uci commit uhttpd
 +	    /etc/init.d/uhttpd reload
      fi
+ }
+ 
+@@ -233,8 +253,10 @@ tsoset
+     fi
+     #cpumode=`uci -q get advancedplus.@basic[0].cpumode`
+     #[ ! $cpumode ] || cpumodeset $cpumode   /usr/bin/zsh
++    if [ "$(which zsh)" ]; then
+     sed -i "\/bin\/zsh/d" /etc/profile
+     [ "x$(uci -q get advancedplus.@basic[0].usshmenu)" = "x1" ] || echo '/usr/bin/zsh'  >> /etc/profile
++    fi
+     uci commit netwizard 
  }
  
 
