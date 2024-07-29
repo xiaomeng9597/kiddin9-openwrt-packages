@@ -211,7 +211,7 @@ set_ttyd() {
 
 dhcp_domain() {
     domain_name="time.android.com"
-    existing_records="$(uci -q get dhcp.$domain_name")"
+    existing_records="$(uci -q get dhcp.$domain_name)"
     if [ "x$(uci -q get advancedplus.@basic[0].dhcp_domain)" = "x1" ] ; then
         local domain_ip="203.107.6.88"
         if [ -z "$existing_records" ]; then
