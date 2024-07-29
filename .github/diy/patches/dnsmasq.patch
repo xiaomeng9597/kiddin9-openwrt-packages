@@ -32,7 +32,7 @@
  
 --- a/dnsmasq/files/dnsmasq.init
 +++ b/dnsmasq/files/dnsmasq.init
-@@ -411,6 +411,21 @@ dhcp_this_host_add() {
+@@ -411,6 +411,23 @@ dhcp_this_host_add() {
  	local mode="$3"
  	local routerstub routername ifdashname
  	local lanaddr lanaddr6 lanaddrs6 ulaprefix
@@ -40,8 +40,10 @@
 +	network_get_ipaddr lanaddr "lan"
 +	if [ -n $lanaddr ]; then
 + 	lanaddr="$(echo "$lanaddr" | sed -e "s/\/24//")"
++ 	default_server="$(uci -q get nginx.default_server.server_name)"
++ 	[ -z "$default_server" ] && default_server="op"
 +	echo "
-+	$lanaddr op" >/tmp/hosts/shortcuts
++	$lanaddr $default_server" >/tmp/hosts/shortcuts
 +	if [ -f /etc/nginx/conf.d/shortcuts.conf ]; then
 +	if [[ "$lanaddr" != "`grep "set \$ip" /etc/nginx/conf.d/shortcuts.conf | head -n1 | cut -f 3 -d " " | sed -e 's/;//'`" ]]; then
 +		sed -i "/set \$ip/c\set \$ip $lanaddr;" /etc/nginx/conf.d/shortcuts.conf
