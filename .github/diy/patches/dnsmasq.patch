@@ -27,6 +27,7 @@
 +	$(INSTALL_BIN) $(STAGING_DIR)/usr/lib/libnftables.so.1 $(1)/usr/lib/libnftables.so.1
 +	$(INSTALL_BIN) $(STAGING_DIR)/usr/lib/libjansson.so.4 $(1)/usr/lib/libjansson.so.4
 +	$(INSTALL_BIN) $(STAGING_DIR)/usr/lib/libnftnl.so.11 $(1)/usr/lib/libnftnl.so.11
++	$(INSTALL_BIN) $(STAGING_DIR)/usr/lib/libmnl.so.0 $(1)/usr/lib/libmnl.so.0
  endef
  
  Package/dnsmasq-dhcpv6/install = $(Package/dnsmasq/install)
