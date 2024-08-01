@@ -164,13 +164,14 @@ function check_site(host, port)
 end
 
 function get_ip_geo_info(ip)
-	local result = luci.sys.exec('curl --retry 3 -m 10 -LfsA "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" https://ipapi.co/' .. ip .. '/json/')
+    local result = luci.sys.exec('curl --retry 3 -m 10 -LfsA "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" https://ipapi.co/json/')
     local json = require "luci.jsonc"
     local info = json.parse(result)
     
     return {
         flag = string.lower(info.country_code) or "un",
-        country = get_country_name(info.country_code) or "Unknown"
+        country = get_country_name(info.country_code) or "Unknown",
+        ip = info.ip
     }
 end
 
@@ -190,14 +191,11 @@ function get_country_name(country_code)
     return country_names[country_code]
 end
 
--- 获取当前代理状态 与节点ip
 function check_ip()
     local e = {}
     local port = 80
-    local ip = luci.sys.exec('curl --retry 3 -m 10 -LfsA "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" http://api.ipify.org/')
-	-- 获取IP地理位置信息
     local geo_info = get_ip_geo_info(ip)
-	e.ip = ip
+    e.ip = geo_info.ip
     e.flag = geo_info.flag
     e.country = geo_info.country
     e.baidu = check_site('www.baidu.com', port)
