@@ -337,11 +337,13 @@ diff --git a/luci-app-passwall/root/etc/uci-defaults/luci-passwall b/luci-app-pa
 index cc39c00a21..079c9723b3 100755
 --- a/luci-app-passwall/root/etc/uci-defaults/luci-passwall
 +++ b/luci-app-passwall/root/etc/uci-defaults/luci-passwall
-@@ -1,5 +1,8 @@
+@@ -1,5 +1,10 @@
  #!/bin/sh
  
 +grep -q api.ipify.org /usr/share/passwall/rules/proxy_host ||
 +	sed -i '$a api.ipify.org' /usr/share/passwall/rules/proxy_host
++grep -q ipapi.co /usr/share/passwall/rules/proxy_host ||
++	sed -i '$a ipapi.co' /usr/share/passwall/rules/proxy_host
 +
  uci -q batch <<-EOF >/dev/null
  	set dhcp.@dnsmasq[0].localuse=1
