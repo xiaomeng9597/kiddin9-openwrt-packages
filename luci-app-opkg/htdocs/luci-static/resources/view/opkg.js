@@ -1133,6 +1133,20 @@ return view.extend({
 	},
 
 	render: function(listData) {
+		var checkUpdateNeeded = function() {
+            return fs.stat('/tmp/opkg-lists').then(function(stat) {
+                if (!stat) return true; // 如果文件夹不存在，需要更新
+
+                var currentTime = Math.floor(Date.now() / 1000);
+                var lastUpdateTime = stat.mtime;
+                var timeDifference = currentTime - lastUpdateTime;
+
+                return timeDifference > 3600; // 如果超过1小时，需要更新
+            }).catch(function() {
+                return true; // 如果出错，也认为需要更新
+            });
+        };
+
 		var query = decodeURIComponent(L.toArray(location.search.match(/\bquery=([^=]+)\b/))[1] || '');
 
 		var view = E([], [
@@ -1252,7 +1266,17 @@ return view.extend({
 		]);
 
 		requestAnimationFrame(function() {
-			updateLists(listData)
+			updateLists(listData);
+            checkUpdateNeeded().then(function(needUpdate) {
+                if (needUpdate) {
+					setTimeout(function() {
+                    var updateButton = document.querySelector('button[data-command="update"]');
+                    if (updateButton) {
+                        updateButton.click();
+                    }
+					}, 10)
+                }
+            });
 		});
 
 		return view;
