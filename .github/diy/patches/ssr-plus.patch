@@ -218,7 +218,14 @@ index 000000000000..a00fff9c79b3
 +window.addEventListener('resize', resize);
 +</script>
 
---- a/luci-app-ssr-plus/root/etc/ssrplus/black.list
-+++ b/luci-app-ssr-plus/root/etc/ssrplus/black.list
-@@ -0,0 +1 @@
-+ipapi.co
+--- a/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
++++ b/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
+@@ -43,5 +43,8 @@ if [ -s "/etc/uwsgi/vassals/luci-webui.ini" ];then
+ 	/etc/init.d/uwsgi restart
+ fi
+ 
++grep -q ipapi.co /etc/ssrplus/black.list ||
++	sed -i '$a ipapi.co' /etc/ssrplus/black.list
++
+ rm -rf /tmp/luci-modulecache /tmp/luci-indexcache
+ exit 0
