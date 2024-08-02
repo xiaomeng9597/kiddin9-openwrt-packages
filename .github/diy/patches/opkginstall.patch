@@ -82,7 +82,7 @@
  				'data-package': name,
  				'class': 'btn cbi-button-action',
  				'click': handleOpkg,
-@@ -1088,7 +1103,7 @@ function updateLists(data)
+@@ -1088,7 +1099,7 @@ function updateLists(data)
  
  	return (data ? Promise.resolve(data) : downloadLists()).then(function(data) {
  		var pg = document.querySelector('.cbi-progressbar'),
@@ -91,7 +91,28 @@
  				.sort(function(a, b) { return a.mount > b.mount })[0] || { size: 0, free: 0 };
  
  		pg.firstElementChild.style.width = Math.floor(mount.size ? (100 / mount.size) * (mount.size - mount.free) : 100) + '%';
-@@ -1138,7 +1153,7 @@ return view.extend({
+@@ -1122,6 +1133,20 @@ return view.extend({
+ 	},
+ 
+ 	render: function(listData) {
++		var checkUpdateNeeded = function() {
++            return fs.stat('/tmp/opkg-lists').then(function(stat) {
++                if (!stat) return true; // 如果文件夹不存在，需要更新
++
++                var currentTime = Math.floor(Date.now() / 1000);
++                var lastUpdateTime = stat.mtime;
++                var timeDifference = currentTime - lastUpdateTime;
++
++                return timeDifference > 3600; // 如果超过1小时，需要更新
++            }).catch(function() {
++                return true; // 如果出错，也认为需要更新
++            });
++        };
++
+ 		var query = decodeURIComponent(L.toArray(location.search.match(/\bquery=([^=]+)\b/))[1] || '');
+ 
+ 		var view = E([], [
+@@ -1138,7 +1163,7 @@ return view.extend({
  				E('div', {}, [
  					E('label', {}, _('Filter') + ':'),
  					E('span', { 'class': 'control-group' }, [
@@ -100,7 +121,7 @@
  						E('button', { 'class': 'btn cbi-button', 'click': handleReset }, [ _('Clear') ])
  					])
  				]),
-@@ -1155,6 +1170,7 @@ return view.extend({
+@@ -1155,6 +1180,7 @@ return view.extend({
  					E('label', {}, _('Actions') + ':'), ' ',
  					E('span', { 'class': 'control-group' }, [
  						E('button', { 'class': 'btn cbi-button-positive', 'data-command': 'update', 'click': handleOpkg, 'disabled': isReadonlyView }, [ _('Update lists…') ]), ' ',
@@ -108,6 +129,25 @@
  						E('button', { 'class': 'btn cbi-button-action', 'click': handleUpload, 'disabled': isReadonlyView }, [ _('Upload Package…') ]), ' ',
  						E('button', { 'class': 'btn cbi-button-neutral', 'click': handleConfig }, [ _('Configure opkg…') ])
  					])
+@@ -1240,7 +1266,17 @@ return view.extend({
+ 		]);
+ 
+ 		requestAnimationFrame(function() {
+-			updateLists(listData)
++			updateLists(listData);
++            checkUpdateNeeded().then(function(needUpdate) {
++                if (needUpdate) {
++					setTimeout(function() {
++                    var updateButton = document.querySelector('button[data-command="update"]');
++                    if (updateButton) {
++                        updateButton.click();
++                    }
++					}, 10)
++                }
++            });
+ 		});
+ 
+ 		return view;
 
 --- a/luci-app-opkg/root/usr/libexec/opkg-call
 +++ b/luci-app-opkg/root/usr/libexec/opkg-call
