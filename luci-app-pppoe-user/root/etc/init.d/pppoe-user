@@ -66,5 +66,5 @@ start() {
 }
 
 stop() {
-    killall -q pppoe-user
+    killall -3 -q pppoe-user
 }

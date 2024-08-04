@@ -12,7 +12,7 @@ stop() {
 }
 
 restart() {
-	killall -USR1 pcat-manager
+	killall -3 -USR1 pcat-manager
 	stop
 	start
 }
