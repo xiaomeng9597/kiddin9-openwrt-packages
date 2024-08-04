@@ -231,6 +231,8 @@ jobs:
         git_clone https://github.com/danchexiaoyang/luci-app-syncthing
         git_clone https://github.com/aa65535/openwrt-dist-luci
         git_clone https://github.com/morytyann/OpenWrt-msd && mvdir OpenWrt-msd
+        git_clone https://github.com/lwz322/luci-app-k3screenctrl
+        git_clone https://github.com/lwz322/k3screenctrl_build
         ) &
         (
         git_clone https://github.com/muink/luci-app-dnsproxy
