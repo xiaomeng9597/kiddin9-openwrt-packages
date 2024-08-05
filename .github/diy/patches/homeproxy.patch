@@ -1,5 +1,5 @@
---- a/homeproxy/root/etc/init.d/homeproxy
-+++ b/homeproxy/root/etc/init.d/homeproxy
+--- a/luci-app-homeproxy/root/etc/init.d/homeproxy
++++ b/luci-app-homeproxy/root/etc/init.d/homeproxy
 @@ -156,7 +156,7 @@ start_service() {
  		procd_set_param command "$PROG"
  		procd_append_param command run --config "$RUN_DIR/sing-box-c.json"
