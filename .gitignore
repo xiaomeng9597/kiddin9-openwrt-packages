@@ -4,7 +4,6 @@
 /luci-app-godproxy/rulesupdate.log
 /qt5
 /luci-app-advancedsetting
-/luci-app-softether
 /luci-app-cifsd
 /luci-app-smstool*
 /luci-app-mosquitto
