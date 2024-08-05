@@ -1140,7 +1140,7 @@ return view.extend({
 	render: function(listData) {
 		var checkUpdateNeeded = function() {
             return Promise.all([
-                L.resolveDefault(fs.stat('/tmp/opkg-lists'), null),
+                L.resolveDefault(fs.stat('/tmp/opkg-lists/openwrt_base'), null),
                 L.resolveDefault(fs.read('/tmp/resolv.conf.d/resolv.conf.auto'), '')
             ]).then(function(results) {
                 var stat = results[0];
