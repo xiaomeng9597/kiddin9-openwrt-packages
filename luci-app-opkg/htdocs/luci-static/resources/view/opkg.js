@@ -1154,7 +1154,7 @@ return view.extend({
                     var currentTime = Math.floor(Date.now() / 1000);
                     var lastUpdateTime = stat.mtime;
                     var timeDifference = currentTime - lastUpdateTime;
-                    needTimeUpdate = timeDifference > 3600; // 如果超过1小时，需要更新
+                    needTimeUpdate = timeDifference > 21600; // 如果超过1小时，需要更新
                 }
 
                 // 检查 resolv.conf.auto 文件内容
