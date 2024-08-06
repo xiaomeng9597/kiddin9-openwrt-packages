@@ -157,6 +157,7 @@ start_service() {
 getinfo() {
 validate_section_config "$SCONFIG" define_global
 local rawhtml stables releases targets pkgarchs download_url="${GLOBAL_download_url:-$DOWNLOAD_URL}"
+# Versions
 rawhtml="$(curl --connect-timeout 10 --retry 3 -sSL "$download_url")"
 stables="$( \
 echo "$rawhtml" | sed -n '/Stable Release/,/Development Snapshots/p' \
@@ -168,12 +169,24 @@ echo "$rawhtml" | sed -n '/Release Archive/,/\$/p' \
 | sed -n '/<ul>/,/<\/ul>/p' | grep 'OpenWrt' \
 | sed -E "s|.+\breleases/([\.0-9]+)/.+|\1|g" \
 )"
+# Targets
 rawhtml="$(curl --connect-timeout 10 --retry 3 -sSL "$download_url/$URLHREF_RELEASES/$(head -n1 <<< "$stables")/$URLHREF_VERS_TARGETS")"
 targets="$( \
 echo "$rawhtml" \
 | sed -n '/<table>/,/<\/table>/p' | grep '<a href=' \
 | sed -E "s|.+\bhref=\"([^/]+)/.+|\1|g" \
 )"
+## subTargets
+fulltargets="$( \
+for target in $targets; do
+	subtargets="$(curl -sL "$download_url/$URLHREF_RELEASES/$(head -n1 <<< "$stables")/$URLHREF_VERS_TARGETS/$target/" \
+		| sed -n '/<table>/,/<\/table>/p' | grep '<a href=' \
+		| sed -E "s|.+\bhref=\"([^/]+)/.+|\1|g" \
+	)"
+	for subtarget in $subtargets; do sed "s|^|$target/|" <<< "$subtarget"; done
+done \
+)"
+# Archs
 rawhtml="$(curl --connect-timeout 10 --retry 3 -sSL "$download_url/$URLHREF_RELEASES/$(head -n1 <<< "$stables")/$URLHREF_VERS_PACKAGES")"
 pkgarchs="$( \
 echo "$rawhtml" \
@@ -186,8 +199,8 @@ echo -e "$stables\n$releases"
 echo -e "$stables\n$releases" > "$RELEASES_LIST"
 mkdir -p "${TARGETS_LIST%/*}" 2>/dev/null
 echo "Targets:"
-echo "$targets"
-echo "$targets" > "$TARGETS_LIST"
+echo "$fulltargets"
+echo "$fulltargets" > "$TARGETS_LIST"
 mkdir -p "${PKGARCHS_LIST%/*}" 2>/dev/null
 echo "PKGArchs:"
 echo "$pkgarchs"
