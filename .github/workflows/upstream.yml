@@ -378,10 +378,10 @@ jobs:
         mv -f applications luciapp
         rm -rf luciapp/{luci-app-qbittorrent,luci-app-zerotier,luci-app-cpufreq,luci-app-e2guardian,luci-app-aliyundrive-fuse,luci-app-syncdial,luci-app-firewall}
         git_sparse_clone master "https://github.com/immortalwrt/luci" applications protocols/luci-proto-minieap themes/luci-theme-argon
-        mv -n applications/* luciapp/; rm -rf applications
+        mv -n luciapp/* applications/; rm -rf luciapp
 
-        for ipk in $(ls -d luciapp/!(luci-app-rclone|luci-app-filebrowser|luci-app-firewall)/); do
-        	if [[ $(ls $ipk/po | wc -l) -gt 3 ]]; then
+        for ipk in $(ls -d applications/!(luci-app-rclone|luci-app-filebrowser|luci-app-firewall)/); do
+        	if [[ $(ls $ipk/po | wc -l) -gt 4 ]]; then
             rm -rf $ipk
         	fi
         done
@@ -394,7 +394,7 @@ jobs:
         mv -n luciapp/!(luci-app-noddos|luci-app-openvpn-server|luci-app-cshark|luci-app-dnscrypt-proxy|luci-app-https-dns-proxy|luci-app-ssr-mudb-server|luci-app-ledtrig-*) ./ ; rm -Rf luciapp
         mv -n lean/* ./ ; rm -Rf lean
         cp -rf wwan/*/* ./ ; rm -Rf wwan
-        mv -n liep/* ./ ; rm -Rf liep
+        mv -n applications/* ./ ; rm -Rf applications
         mv -n openwrt-app-actions/applications/* ./;rm -rf openwrt-app-actions
         rm -Rf */.git
         for pkg in $(ls -d .github/diy/packages/*); do
