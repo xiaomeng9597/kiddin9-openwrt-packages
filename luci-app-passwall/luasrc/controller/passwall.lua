@@ -223,18 +223,18 @@ function check_site(host, port)
 end
 
 function get_ip_geo_info(ip)
-    local result = luci.sys.exec('curl --retry 3 -m 10 -LfsA "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" https://ipapi.co/json/')
+    local result = luci.sys.exec('curl --retry 3 -m 10 -LfsA "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" http://ip-api.com/json/')
     local json = require "luci.jsonc"
     local info = json.parse(result)
     
     return {
-        flag = string.lower(info.country_code) or "un",
-        country = get_country_name(info.country_code) or "Unknown",
-        ip = info.ip
+        flag = string.lower(info.countryCode) or "un",
+        country = get_country_name(info.countryCode) or "Unknown",
+        ip = info.query
     }
 end
 
-function get_country_name(country_code)
+function get_country_name(countryCode)
     local country_names = {
         US = "美国", CN = "中国", JP = "日本", GB = "英国", DE = "德国",
         FR = "法国", BR = "巴西", IT = "意大利", RU = "俄罗斯", CA = "加拿大",
