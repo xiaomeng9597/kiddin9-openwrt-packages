@@ -39,7 +39,7 @@
     },
     "admin/services/squid/installation": {
         "title": "How To Install",
-        "order": 30,
+        "order": 40,
         "action": {
             "type": "view",
             "path": "squid-adv/install"
@@ -47,7 +47,7 @@
     },
     "admin/services/squid/advanced": {
         "title": "Advanced",
-        "order": 30,
+        "order": 50,
         "action": {
             "type": "view",
             "path": "squid-adv/advanced"
