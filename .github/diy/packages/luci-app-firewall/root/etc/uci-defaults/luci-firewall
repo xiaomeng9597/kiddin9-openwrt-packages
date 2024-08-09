@@ -50,7 +50,7 @@ EOF
 chmod +x /etc/firewall.exwan
 fi
 
-grep -q uci get firewall.include.exwan || {
+uci -q get firewall.include.exwan || {
 	uci batch <<EOF
 	set firewall.exwan=include
 	set firewall.exwan.type=script
