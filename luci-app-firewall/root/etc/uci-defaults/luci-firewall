@@ -50,14 +50,8 @@ EOF
 chmod +x /etc/firewall.exwan
 fi
 
-uci -q get firewall.exwan || {
-uci batch <<EOF
-	set firewall.exwan=include
-	set firewall.exwan.type=script
-	set firewall.exwan.path=/etc/firewall.exwan
-	set firewall.exwan.reload=1
-	commit firewall
-EOF
-}
+if [ -z "$(command -v fw3)" ]; then
+    sed -i '/start_service() {/,/^}/c\start_service() {\n\ttest -f /etc/firewall.exwan && sh /etc/firewall.exwan\n\tfw3 ${QUIET} start\n}' /etc/init.d/firewall
+fi
 
 exit 0
