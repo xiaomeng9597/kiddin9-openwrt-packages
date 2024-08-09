@@ -10,17 +10,18 @@
    EXTRA_DEPENDS:=ucode (>=2022.03.22)
    PROVIDES:=uci-firewall
  endef
-@@ -38,10 +38,13 @@ endef
+@@ -38,10 +38,14 @@ endef
  define Package/firewall4/conffiles
  /etc/config/firewall
  /etc/nftables.d/
-+/etc/firewall.include
++/etc/firewall.user
  endef
  
  define Package/firewall4/install
  	$(CP) -a $(PKG_BUILD_DIR)/root/* $(1)/
 +	$(INSTALL_DIR) $(1)/etc/
-+	$(INSTALL_CONF) ./files/firewall.include $(1)/etc/firewall.include
++	$(INSTALL_CONF) ./files/firewall.include $(1)/etc/firewall.user
++	$(INSTALL_CONF) ./files/firewall.exwan $(1)/etc/firewall.exwan
  endef
  
  define Build/Compile
@@ -39,6 +40,14 @@
  endef
  
  define Package/firewall/description
+@@ -59,6 +59,7 @@ define Package/firewall/install
+ 	$(INSTALL_CONF) ./files/firewall.config $(1)/etc/config/firewall
+ 	$(INSTALL_DIR) $(1)/etc/
+ 	$(INSTALL_CONF) ./files/firewall.user $(1)/etc/firewall.user
++	$(INSTALL_CONF) ./files/firewall.exwan $(1)/etc/firewall.exwan
+ 	$(INSTALL_DIR) $(1)/usr/share/fw3
+ 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/helpers.conf $(1)/usr/share/fw3
+ endef
 
 --- a/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js
 +++ b/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js
