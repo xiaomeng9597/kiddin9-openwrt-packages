@@ -47,7 +47,7 @@ fi
 uci commit firewall
 EOF
 
-chmod +x /etc/firewall.exwan
+chmod 600 /etc/firewall.exwan
 fi
 
 if [ -z "$(command -v fw3)" ]; then
