@@ -51,13 +51,13 @@ chmod +x /etc/firewall.exwan
 fi
 
 uci -q get firewall.include.exwan || {
-	uci batch <<EOF
+uci batch <<EOF
 	set firewall.exwan=include
 	set firewall.exwan.type=script
 	set firewall.exwan.path=/etc/firewall.exwan
 	set firewall.exwan.reload=1
 	commit firewall
-	EOF
+EOF
 }
 
 exit 0
