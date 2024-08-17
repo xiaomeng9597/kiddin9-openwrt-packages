@@ -8,11 +8,12 @@
 return view.extend({
     load: function () {
         return Promise.all([
+            uci.load('mihomo'),
             mihomo.listProfiles(),
         ]);
     },
     render: function (data) {
-        const profiles = data[0];
+        const profiles = data[1];
 
         let m, s, o;
         

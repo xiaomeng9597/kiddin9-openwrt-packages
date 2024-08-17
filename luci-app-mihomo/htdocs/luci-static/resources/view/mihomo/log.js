@@ -1,6 +1,7 @@
 'use strict';
 'require form';
 'require view';
+'require uci';
 'require fs';
 'require poll';
 'require tools.mihomo as mihomo'
@@ -8,13 +9,14 @@
 return view.extend({
     load: function () {
         return Promise.all([
+            uci.load('mihomo'),
             mihomo.getAppLog(),
             mihomo.getCoreLog()
         ]);
     },
     render: function (data) {
-        const appLog = data[0];
-        const coreLog = data[1];
+        const appLog = data[1];
+        const coreLog = data[2];
 
         let m, s, o;
 
