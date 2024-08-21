@@ -23,11 +23,10 @@ partition_table=$(fdisk -l $ROOT_DISK | grep -i "Disklabel type:")
     fi
 
     # 创建新分区
-	ROOT_DISK_NAME="$(echo $ROOT_DISK | cut -d / -f 3)"
-	LAST_PART_NAME="$(lsblk -o NAME | grep $ROOT_DISK_NAME | tail -n 1 | grep -o '[0-9a-zA-Z]*')"
-  NEW_PART_NAME="$(echo "$LAST_PART_NAME" | sed -E 's/([a-zA-Z]+)([0-9]+)$/\1'$(($(echo "$LAST_PART_NAME" | sed -E 's/.*[a-zA-Z]+([0-9]+)$/\1/') + 1))'/')"
+ROOT_DISK_NAME="$(echo $ROOT_DISK | cut -d / -f 3)"
+LAST_PART_NAME="$(lsblk -o NAME | grep $ROOT_DISK_NAME | tail -n 1 | grep -o '[0-9a-zA-Z]*')"
+NEW_PART_NAME="$(echo "$LAST_PART_NAME" | sed -E 's/([a-zA-Z]+)([0-9]+)$/\1'$(($(echo "$LAST_PART_NAME" | sed -E 's/.*[a-zA-Z]+([0-9]+)$/\1/') + 1))'/')"
 parted -s $ROOT_DISK mkpart primary ext4 ${LAST_PART_END}MB 100%
-parted -s /dev/sdb -- mklabel gpt mkpart extroot 2048s -2048s
 
     # 格式化新分区
     mkfs.ext4 -F -L "$LABEL" /dev/${NEW_PART_NAME}
