@@ -31,7 +31,7 @@ parted -s $ROOT_DISK mkpart primary ext4 ${LAST_PART_END}MB 100%
     # 格式化新分区
     mkfs.ext4 -F -L "$LABEL" /dev/${NEW_PART_NAME}
 
-if [ uci -q get wizard.default.mountdocker == "1" ]; then
+if [ "$(uci -q get wizard.default.mountdocker)" == "1" ]; then
 uci -q get fstab.docker || {
 eval $(block info /dev/${NEW_PART_NAME} | grep -o -e 'UUID="\S*"')
 uci -q delete fstab.docker

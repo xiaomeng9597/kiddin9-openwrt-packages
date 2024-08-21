@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=automount
 PKG_FLAGS:=nonshared
-PKG_RELEASE:=39
+PKG_RELEASE:=40
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_TARGET_ramips
@@ -48,6 +48,9 @@ define Package/ntfs3-mount
 endef
 
 define Build/Compile
+endef
+
+define Package/automount/install
 endef
 
 define Package/ntfs3-mount/install
