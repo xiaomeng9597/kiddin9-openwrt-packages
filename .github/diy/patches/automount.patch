@@ -1,11 +1,12 @@
 --- a/automount/Makefile
 +++ b/automount/Makefile
-@@ -20,6 +20,8 @@ define Package/automount
+@@ -20,6 +20,9 @@ define Package/automount
    TITLE:=Mount autoconfig hotplug script.
    MAINTAINER:=Lean
    DEPENDS:= \
 +    +kmod-usb3 \
 +    +kmod-usb2 \
++    +luci-app-diskman \
      +block-mount \
      +e2fsprogs \
      +kmod-usb-storage \
