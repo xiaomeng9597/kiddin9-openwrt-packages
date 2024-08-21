@@ -30,9 +30,19 @@ parted -s $ROOT_DISK mkpart primary ext4 ${LAST_PART_END}MB 100%
 
     # 格式化新分区
     mkfs.ext4 -F -L "$LABEL" /dev/${NEW_PART_NAME}
+
+if [ uci -q get wizard.default.mountdocker == "1" ]; then
+uci -q get fstab.docker || {
+eval $(block info /dev/${NEW_PART_NAME} | grep -o -e 'UUID="\S*"')
+uci -q delete fstab.docker
+uci set fstab.docker="mount"
+uci set fstab.docker.uuid="${UUID}"
+uci set fstab.docker.target="/opt/docker"
+uci commit fstab
+}
+fi
 }
 for disk in $(find /dev -type b \( -name 'sd[a-z]' -o -name 'mmcblk[0-9]' -o -name 'nvme[0-9]n[0-9]' -o -name 'vd[a-z]' -o -name 'sata[a-z]' \) 2>/dev/null | sort); do
 NEWPART $disk
 done
-
 }
