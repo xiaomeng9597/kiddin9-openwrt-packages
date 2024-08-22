@@ -16,7 +16,7 @@
  
  	$(INSTALL_DIR) $(1)/etc/hotplug.d/block
 -	$(INSTALL_BIN) ./files/15-automount $(1)/etc/hotplug.d/block/
-+	$(INSTALL_BIN) ./files/5-automount $(1)/etc/hotplug.d/block/
++	$(INSTALL_BIN) ./files/05-automount $(1)/etc/hotplug.d/block/
  endef
  
  define Package/ntfs3-mount/install
