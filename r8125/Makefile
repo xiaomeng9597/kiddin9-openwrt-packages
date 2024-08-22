@@ -1,35 +1,39 @@
+#
+# Download realtek r8125 linux driver from official site:
+# [https://www.realtek.com/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software]
+#
+
 include $(TOPDIR)/rules.mk
+include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=r8125
-PKG_VERSION:=9.013.02
-PKG_RELEASE:=42
+PKG_VERSION:=9.013.02-2
+PKG_RELEASE:=43
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://github.com/openwrt/rtl8125/releases/download/$(PKG_VERSION)
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/awesometic/realtek-r8125-dkms/tar.gz/$(PKG_VERSION)?
 PKG_HASH:=skip
+PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/realtek-$(PKG_NAME)-dkms-$(PKG_VERSION)
 
-PKG_BUILD_PARALLEL:=1
-PKG_LICENSE:=GPLv2
-PKG_MAINTAINER:=Alvaro Fernandez Rojas <noltari@gmail.com>
+PKG_LICENSE:=GPL-2.0-only
+PKG_LICENSE_FILE:=LICENSE
 
-include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/package.mk
 
 define KernelPackage/r8125
+  TITLE:=Driver for Realtek r8125 chipsets
   SUBMENU:=Network Devices
-  TITLE:=Realtek RTL8125 PCI 2.5 Gigabit Ethernet driver
-  DEPENDS:=@PCI_SUPPORT +kmod-libphy
-  FILES:=$(PKG_BUILD_DIR)/src/r8125.ko
+  VERSION:=$(LINUX_VERSION)+$(PKG_VERSION)-$(BOARD)-$(PKG_RELEASE)
+  FILES:= $(PKG_BUILD_DIR)/src/r8125.ko
   AUTOLOAD:=$(call AutoProbe,r8125)
-  PROVIDES:=kmod-r8169 kmod-r8125-rss
+endef
+
+define Package/r8125/description
+  This package contains a driver for Realtek r8125 chipsets.
 endef
 
 define Build/Compile
-	+$(KERNEL_MAKE) $(PKG_JOBS) \
-		M="$(PKG_BUILD_DIR)/src" \
-		CONFIG_ASPM=n \
-		ENABLE_RSS_SUPPORT=y \
-		modules
+	+$(KERNEL_MAKE) M=$(PKG_BUILD_DIR)/src modules
 endef
 
 $(eval $(call KernelPackage,r8125))
