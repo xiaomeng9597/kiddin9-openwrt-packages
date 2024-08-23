@@ -1,53 +1,3 @@
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            display: flex; 
-            flex-direction: column;
-            margin: 0;
-            min-height: 100vh; 
-            background-color: #f0f0f0;
-            align-items: center; 
-            justify-content: flex-start; 
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            width: 100%; 
-            padding: 20px;
-            box-sizing: border-box; 
-            align-items: center; 
-            text-align: center; 
-        }
-        h1 {
-            color: #00FF7F;
-        }
-        h2 {
-            color: #333;
-        }
-        .button-group {
-            display: inline-block;
-        }
-        .delete-button,
-        .rename-button,
-        .edit-button {
-            margin-left: 5px;
-            cursor: pointer;
-        }
-        #current-time {
-            margin-bottom: 20px; 
-        }
-    </style>
-</head>
-<body>
-    <h1>Mihomo文件管理器</h1>
-</body>
-</html>
-
 <?php
 $uploadDir = '/etc/neko/proxy_provider/';
 $configDir = '/etc/neko/config/';
@@ -229,202 +179,6 @@ function formatSize($size) {
 }
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background-image: url('/nekoclash/assets/img/1.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            color: white;
-        }
-        .editor {
-            width: 100%;
-            height: 400px; 
-            background-color: #222; 
-            color: white;
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            font-family: monospace; 
-        }
-        .delete-button, .rename-button, .edit-button, .download-button {
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .delete-button {
-            background-color: red;
-            color: white;
-            border: none;
-        }
-        .delete-button:hover {
-            background-color: darkred;
-        }
-        .rename-button {
-            background-color: lightgreen;
-            color: black;
-            border: none;
-        }
-        .rename-button:hover {
-            background-color: darkgreen;
-        }
-        .edit-button {
-            background-color: orange;
-            color: white;
-            border: none;
-        }
-        .edit-button:hover {
-            background-color: darkred;
-        }
-        .download-button {
-            background-color: lightblue;
-            color: black;
-            border: none;
-        }
-        .download-button:hover {
-            background-color: deepskyblue;
-        }
-        .button-group {
-            display: inline-flex;
-            gap: 5px;
-        }
-    </style>
-</head>
-<body>
-    <h1 style="color: #00FFFF;">文件上传和下载管理</h1>
-
-    <h2 style="color: #00FF7F;">代理文件管理</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="file" name="fileInput" required>
-        <input type="submit" value="上传代理文件">
-    </form>
-    <ul>
-        <?php foreach ($proxyFiles as $file): ?>
-            <?php $filePath = $uploadDir . $file; ?>
-            <li>
-                <a href="download.php?file=<?php echo urlencode($file); ?>"><?php echo htmlspecialchars($file); ?></a>
-                (大小: <?php echo file_exists($filePath) ? formatSize(filesize($filePath)) : '文件不存在'; ?>)
-                <div class="button-group">
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="deleteFile" value="<?php echo htmlspecialchars($file); ?>">
-                        <input type="submit" class="delete-button" value="删除" onclick="return confirm('确定要删除这个文件吗？');">
-                    </form>
-
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="oldFileName" value="<?php echo htmlspecialchars($file); ?>">
-                        <input type="text" name="newFileName" placeholder="新文件名" required>
-                        <input type="hidden" name="fileType" value="proxy">
-                        <input type="submit" class="rename-button" value="重命名">
-                    </form>
-
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="editFile" value="<?php echo htmlspecialchars($file); ?>">
-                        <input type="hidden" name="fileType" value="proxy">
-                        <input type="submit" class="edit-button" value="编辑">
-                    </form>
-                </div>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-
-    <h2 style="color: #00FF7F;">配置文件管理</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="file" name="configFileInput" required>
-        <input type="submit" value="上传配置文件">
-    </form>
-    <ul>
-        <?php foreach ($configFiles as $file): ?>
-            <?php $filePath = $configDir . $file; ?>
-            <li>
-                <a href="download.php?file=<?php echo urlencode($file); ?>"><?php echo htmlspecialchars($file); ?></a>
-                (大小: <?php echo file_exists($filePath) ? formatSize(filesize($filePath)) : '文件不存在'; ?>)
-                <div class="button-group">
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="deleteConfigFile" value="<?php echo htmlspecialchars($file); ?>">
-                        <input type="submit" class="delete-button" value="删除" onclick="return confirm('确定要删除这个文件吗？');">
-                    </form>
-
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="oldFileName" value="<?php echo htmlspecialchars($file); ?>">
-                        <input type="text" name="newFileName" placeholder="新文件名" required>
-                        <input type="hidden" name="fileType" value="config">
-                        <input type="submit" class="rename-button" value="重命名">
-                    </form>
-
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="editFile" value="<?php echo htmlspecialchars($file); ?>">
-                        <input type="hidden" name="fileType" value="config">
-                        <input type="submit" class="edit-button" value="编辑">
-                    </form>
-                </div>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-
-    <h2 style="color: #00FF7F;">自定义目录文件上传</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="text" name="customDir" placeholder="自定义目录" required>
-        <input type="file" name="customFileInput" required>
-        <input type="submit" value="上传到自定义目录">
-    </form>
-    <?php
-    if (isset($_GET['customDir'])) {
-        $customDir = rtrim($_GET['customDir'], '/') . '/';
-        if (is_dir($customDir)) {
-            $customFiles = array_diff(scandir($customDir), array('.', '..'));
-            echo '<ul>';
-            foreach ($customFiles as $file) {
-                echo '<li>';
-                echo '<a href="?customDir=' . urlencode($customDir) . '&customFile=' . urlencode($file) . '">' . htmlspecialchars($file) . '</a>';
-                echo ' (大小: ' . formatSize(filesize($customDir . $file)) . ')';
-                echo '</li>';
-            }
-            echo '</ul>';
-        } else {
-            echo '目录不存在！';
-        }
-    }
-    ?>
-
-    <?php if (isset($fileContent)): ?>
-        <?php $fileToEdit = ($_POST['fileType'] === 'proxy') ? $uploadDir . basename($_POST['editFile']) : $configDir . basename($_POST['editFile']); ?>
-        <h2 style="color: #00FF7F;">编辑文件: <?php echo $editingFileName; ?></h2>
-        <p>最后更新日期: <?php echo date('Y-m-d H:i:s', filemtime($fileToEdit)); ?></p>
-        <form action="" method="post">
-            <textarea name="saveContent" rows="15" cols="150" class="editor"><?php echo $fileContent; ?></textarea><br>
-            <input type="hidden" name="fileName" value="<?php echo htmlspecialchars($_POST['editFile']); ?>">
-            <input type="hidden" name="fileType" value="<?php echo htmlspecialchars($_POST['fileType']); ?>">
-            <input type="submit" value="保存内容">
-        </form>
-    <?php endif; ?>
-    <br>
-    <style>
-        .button {
-            text-decoration: none;
-            padding: 10px;
-            background-color: lightblue;
-            color: black;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-            transition: background-color 0.3s; 
-        }
-        .button:hover {
-            background-color: deepskyblue; 
-        }
-    </style>
-
-    <div style="display: flex; gap: 10px;">
-        <a href="javascript:history.back()" class="button">返回上一级菜单</a>
-        <a href="/nekoclash/upload.php" class="button">返回当前菜单</a>
-        <a href="/nekoclash/configs.php" class="button">返回配置菜单</a>
-        <a href="/nekoclash" class="button">返回主菜单</a>
-    </div>
-</body>
-</html>
 <?php
 $subscriptionPath = '/etc/neko/proxy_provider/';
 $subscriptionFile = $subscriptionPath . 'subscriptions.json';
@@ -517,249 +271,6 @@ if (isset($_POST['set_auto_update'])) {
     $message = "自动更新设置已保存！";
 }
 ?>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mihomo文件管理器</title>
-    <style>
-        .input-group {
-            margin-bottom: 10px;
-        }
-        .input-group label {
-            margin-right: 10px;
-            white-space: nowrap;
-        }
-        .help-text {
-            font-size: 14px;
-            color: white;
-            margin-bottom: 20px;
-        }
-        body {
-            background-color: #333;
-            font-family: Arial, sans-serif; 
-        }
-        h1, .help-text {
-            color: rgb;
-        }
-        textarea.copyable {
-            width: 50%; 
-            height: 150px; 
-            resize: none; 
-            padding: 10px; 
-            border: 1px solid #ccc; 
-            border-radius: 5px;    
-            background-color: #444; 
-            color: white; 
-            font-size: 14px; 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
-            display: none; 
-        }
-        textarea.copyable:focus {
-            outline: none; 
-            border-color: #ff79c6; 
-            box-shadow: 0 0 5px rgba(255, 121, 198, 0.5); 
-        }
-        #copyButton {
-            background-color: #00BFFF; 
-            color: white; 
-            padding: 5px 10px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer;
-        }
-        #copyButton:hover {
-            background-color: #008CBA;
-        }
-        button[name="update"] {
-            background-color: #FF6347; 
-            color: white; 
-            padding: 5px 10px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-        }
-        button[name="update"]:hover {
-            background-color: darkgreen; 
-        }
-        #convertButton,
-        button[name="convert_base64"] {
-            background-color: #00BFFF;
-            color: white; 
-            padding: 5px 10px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 14px; 
-        }
-        #convertButton:hover,
-        button[name="convert_base64"]:hover {
-            background-color: #008CBA; 
-        }
-        button[name="set_auto_update"] {
-            background-color: #32CD32; 
-            color: white; 
-            padding: 5px 10px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            margin-top: 10px; 
-        }
-        button[name="set_auto_update"]:hover {
-            background-color: #228B22; 
-        }
-        .form-spacing {
-            margin-bottom: 30px; 
-        }
-    </style>
-</head>
-<body>
-    <h1 style="color: #00FF7F;">Mihomo订阅程序</h1>
-    <p class="help-text">
-        请在下方输入框中填写您的订阅链接，删除上方subscriptions.json文件可以清空订阅信息。<br>Mihomo订阅支持所有格式《Base64/clash格式/节点链接》，如需解码请用订阅转换。<button id="convertButton">访问订阅转换网站</button>
-    <br>
-        节点转换工具输入你的节点信息转换，会自动保存为代理，简化流程。      
-    </p>
-
-</script>
-    <?php if (!empty($decodedContent)): ?>
-        <h2>解码后的内容</h2>
-        <textarea name="decoded_content" id="decoded_content" class="copyable" readonly><?php echo htmlspecialchars($decodedContent); ?></textarea>
-        <button id="copyButton" onclick="copyToClipboard()">复制到剪贴板</button>
-        <script>
-            document.querySelector('.copyable').style.display = 'block';
-          </script>
-     <?php endif; ?>
-
-    <h2 style="color: #00FF7F;">自动更新设置</h2>
-    <form method="post">
-        <div class="input-group">
-            <label for="update_time">设置更新时间:</label>
-            <select name="update_time" id="update_time" required>
-                <?php
-                for ($h = 0; $h < 24; $h++) {
-                    $time = sprintf('%02d:00', $h);
-                    $selected = ($time == $autoUpdateConfig['update_time']) ? 'selected' : '';
-                    echo "<option value='$time' $selected>$time</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="input-group">
-            <label for="auto_update_enabled">启用自动更新:</label>
-            <input type="checkbox" name="auto_update_enabled" id="auto_update_enabled" <?php echo $autoUpdateConfig['auto_update_enabled'] ? 'checked' : ''; ?>>
-        </div>
-        <button type="submit" name="set_auto_update">保存设置</button>
-    </form>
-
-    <div class="form-spacing"></div> 
-
-    <?php if ($message): ?>
-        <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
-    <?php endif; ?>
-
-    <?php for ($i = 0; $i < 7; $i++): ?>
-        <form method="post">
-            <div class="input-group">
-                <label for="subscription_url_<?php echo $i; ?>">订阅链接 <?php echo ($i + 1); ?>:</label>
-                <input type="text" name="subscription_url" id="subscription_url_<?php echo $i; ?>" value="<?php echo htmlspecialchars($subscriptions[$i]['url']); ?>" required>
-            </div>
-            <div class="input-group">
-                <label for="custom_file_name_<?php echo $i; ?>">自定义文件名:</label>
-                <input type="text" name="custom_file_name" id="custom_file_name_<?php echo $i; ?>" value="<?php echo htmlspecialchars($subscriptions[$i]['file_name']); ?>">
-                <input type="hidden" name="index" value="<?php echo $i; ?>">
-                <button type="submit" name="update">更新配置</button>
-            </div>
-        </form>
-    <?php endfor; ?>
-
-    <h2 style="color: #00FF7F;">Base64 节点信息转换</h2>
-    <form method="post">
-        <div class="input-group">
-            <label for="base64_content">Base64 内容:</label>
-            <textarea name="base64_content" id="base64_content" rows="4" required></textarea>
-        </div>
-        <button type="submit" name="convert_base64">生成节点信息</button>
-    </form>
-
-    <script>
-        document.getElementById('convertButton').onclick = function() {
-            window.open('https://suburl.v1.mk', '_blank');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const autoUpdateEnabled = <?php echo json_encode($autoUpdateConfig['auto_update_enabled']); ?>;
-            const updateTime = <?php echo json_encode($autoUpdateConfig['update_time']); ?>;
-
-            if (autoUpdateEnabled) {
-                const now = new Date();
-                const updateParts = updateTime.split(':');
-                const updateHour = parseInt(updateParts[0], 10);
-                const updateMoment = new Date(now.getFullYear(), now.getMonth(), now.getDate(), updateHour, 0, 0, 0);
-
-                if (now > updateMoment) {
-                    updateMoment.setDate(updateMoment.getDate() + 1);
-                }
-
-                const timeUntilUpdate = updateMoment - now;
-
-                setTimeout(function() {
-                    fetch(window.location.href, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: new URLSearchParams({
-                            'update': true
-                        })
-                    }).then(response => response.text())
-                    .then(data => console.log('自动更新完成', data))
-                    .catch(error => console.error('自动更新错误:', error));
-                    
-                    setInterval(function() {
-                        fetch(window.location.href, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: new URLSearchParams({
-                                'update': true
-                            })
-                        }).then(response => response.text())
-                        .then(data => console.log('自动更新完成', data))
-                        .catch(error => console.error('自动更新错误:', error));
-                    }, 24 * 60 * 60 * 1000); 
-                }, timeUntilUpdate);
-            }
-        });
-    </script>
-</body>
-</html>
-    <style>
-        button[name="convert"] {
-            background-color: #00BFFF; 
-            color: white; 
-            padding: 5px 10px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 14px; 
-            margin-top: 10px; 
-        }
-
-        button[name="convert"]:hover {
-            background-color: #008CBA; 
-        }
-    </style>
-
-    <h1 style="color: #00FF7F;">节点转换工具</h1>
-  <form method="post">
-        <textarea name="input" rows="10" cols="50" placeholder="粘贴 ss//vless//vmess//trojan//hysteria2 节点信息..."></textarea>
-
-        <button type="submit" name="convert">转换</button>
-    </form>
-
 <?php
 
 function parseVmess($base) {
@@ -974,7 +485,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = $_POST['input'] ?? '';
 
     if (empty($input)) {
-        echo "Input is empty. Please provide the necessary information.";
+        echo ".";
     } else {
         $lines = explode("\n", trim($input));
         $allcfgs = "";
@@ -1020,3 +531,381 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传和管理</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: flex-start;
+            color: #E0E0E0; 
+            background-color: red;
+            font-family: Arial, sans-serif;
+            background: url('/nekoclash/assets/img/1.jpg') no-repeat center center fixed; 
+            background-size: cover; 
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            max-width: 900px; 
+            padding: 20px;
+            box-sizing: border-box;
+            align-items: center;
+            text-align: center;
+            background: rgba(30, 30, 30, 0.8); 
+            border-radius: 10px;
+            margin-top: 50px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+        }
+        h1, h2, .help-text {
+            color: #00FF7F; 
+        }
+        .form-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .form-inline .form-control-file {
+            flex: 1;
+        }
+        .file-upload-button {
+            padding: 10px 20px;
+            background-color: #03DAC6; 
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .file-upload-button:hover {
+            background-color: #018786; 
+        }
+        .list-group {
+            width: 100%;
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+        }
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #2C2C2C; 
+            border-bottom: 1px solid #444;
+        }
+        .list-group-item a {
+            color: #BB86FC; 
+            text-decoration: none;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .button-group form {
+            display: inline;
+        }
+        .button-group .btn {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-danger {
+            background-color: #CF6679; 
+            color: #121212;
+        }
+        .btn-danger:hover {
+            background-color: #B00020; 
+        }
+        .btn-success {
+            background-color: #03DAC6; 
+            color: #121212;
+        }
+        .btn-success:hover {
+            background-color: #018786; 
+        }
+        .btn-warning {
+            background-color: #F4B400; 
+            color: #121212;
+        }
+        .btn-warning:hover {
+            background-color: #C79400; 
+        }
+        .editor {
+            height: 300px; 
+            width: 90%; 
+            min-width: 800px; 
+            max-width: 800px; 
+            background-color: #2C2C2C; 
+            color: #E0E0E0; 
+            padding: 15px; 
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 20px;
+            overflow: auto; 
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .nav-buttons .btn {
+            padding: 10px 20px;
+            background-color: #03DAC6; 
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .nav-buttons .btn:hover {
+            background-color: #018786; 
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            margin-right: 10px;
+            white-space: nowrap;
+            color: #00FF7F;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #2C2C2C;
+            color: #E0E0E0;
+        }
+        button[name="update"] {
+            background-color: #FF6347;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button[name="update"]:hover {
+            background-color: darkgreen;
+        }
+        .form-spacing {
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: #4CAF50; 
+            color: white;
+            border: none;
+            padding: 5px 10px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            cursor: pointer; 
+            border-radius: 4px; 
+        }
+        button:hover {
+            background-color: darkgreen; 
+        }
+
+       .navigation {
+           display: flex;
+           justify-content: center; 
+           gap: 10px; 
+           margin-top: 20px;
+       }
+
+       .navigation .btn {
+           padding: 12px 24px; 
+           background-color: #03DAC6; 
+           color: #121212; 
+           border: none; 
+           border-radius: 8px; 
+           cursor: pointer; 
+           text-decoration: none; 
+           font-size: 16px; 
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+           display: inline-flex; 
+           align-items: center; 
+           justify-content: center; 
+       }
+
+       .navigation .btn:hover {
+           background-color: #018786; 
+           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+       }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="text-primary">Mihomo文件管理器</h1>
+
+        <section id="proxy-management" class="section-gap">
+            <h2 class="text-success">代理文件管理</h2>
+            <form action="" method="post" enctype="multipart/form-data" class="upload-form mb-3">
+                <div class="input-group">
+                    <input type="file" name="fileInput" id="fileInput" class="form-control-file">
+                    <button type="submit" class="btn btn-primary btn-custom">上传</button>
+                </div>
+            </form>
+            <ul class="list-group list-group-flush">
+                <?php foreach ($proxyFiles as $file): ?>
+                    <?php $filePath = $uploadDir . $file; ?>
+                    <li class="list-group-item">
+                        <a href="download.php?file=<?php echo urlencode($file); ?>"><?php echo htmlspecialchars($file); ?></a>
+                        <span class="file-size">(大小: <?php echo file_exists($filePath) ? formatSize(filesize($filePath)) : '文件不存在'; ?>)</span>
+                        <div class="button-group">
+                            <form action="" method="post">
+                                <input type="hidden" name="deleteFile" value="<?php echo htmlspecialchars($file); ?>">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('确定要删除这个文件吗？');">删除</button>
+                            </form>
+                            <form action="" method="post">
+                                <input type="hidden" name="oldFileName" value="<?php echo htmlspecialchars($file); ?>">
+                                <input type="text" name="newFileName" class="form-control form-control-sm" placeholder="新文件名" required>
+                                <input type="hidden" name="fileType" value="proxy">
+                                <button type="submit" class="btn btn-warning">重命名</button>
+                            </form>
+                            <form action="" method="post">
+                                <input type="hidden" name="editFile" value="<?php echo htmlspecialchars($file); ?>">
+                                <input type="hidden" name="fileType" value="proxy">
+                                <button type="submit" class="btn btn-success">编辑</button>
+                            </form>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
+
+        <section id="config-management" class="section-gap">
+            <h2 class="text-success">配置文件管理</h2>
+            <form action="" method="post" enctype="multipart/form-data" class="upload-form mb-3">
+                <div class="input-group">
+                    <input type="file" name="configFileInput" id="configFileInput" class="form-control-file">
+                    <button type="submit" class="btn btn-primary btn-custom">上传</button>
+                </div>
+            </form>
+            <ul class="list-group list-group-flush">
+                <?php foreach ($configFiles as $file): ?>
+                    <?php $filePath = $configDir . $file; ?>
+                    <li class="list-group-item">
+                        <a href="download.php?file=<?php echo urlencode($file); ?>"><?php echo htmlspecialchars($file); ?></a>
+                        <span class="file-size">(大小: <?php echo file_exists($filePath) ? formatSize(filesize($filePath)) : '文件不存在'; ?>)</span>
+                        <div class="button-group">
+                            <form action="" method="post">
+                                <input type="hidden" name="deleteConfigFile" value="<?php echo htmlspecialchars($file); ?>">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('确定要删除这个文件吗？');">删除</button>
+                            </form>
+                            <form action="" method="post">
+                                <input type="hidden" name="oldFileName" value="<?php echo htmlspecialchars($file); ?>">
+                                <input type="text" name="newFileName" class="form-control form-control-sm" placeholder="新文件名" required>
+                                <input type="hidden" name="fileType" value="config">
+                                <button type="submit" class="btn btn-warning">重命名</button>
+                            </form>
+                            <form action="" method="post">
+                                <input type="hidden" name="editFile" value="<?php echo htmlspecialchars($file); ?>">
+                                <input type="hidden" name="fileType" value="config">
+                                <button type="submit" class="btn btn-success">编辑</button>
+                            </form>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
+<div class="navigation">
+    <a href="javascript:history.back()" class="btn">返回上一级菜单</a>
+    <a href="/nekoclash/upload.php" class="btn">返回当前菜单</a>
+    <a href="/nekoclash/configs.php" class="btn">返回配置菜单</a>
+    <a href="/nekoclash" class="btn">返回主菜单</a>
+</div>
+        <section id="custom-dir-upload" class="section-gap">
+            <h2 class="text-success">自定义目录文件上传</h2>
+            <form action="" method="post" enctype="multipart/form-data" class="upload-form mb-3">
+                <div class="input-group">
+                    <input type="text" name="customDir" id="customDir" class="form-control" placeholder="自定义目录" required>
+                    <input type="file" name="customFileInput" id="customFileInput" class="form-control-file ml-2" required>
+                    <button type="submit" class="btn btn-primary btn-custom">上传到自定义目录</button>
+                </div>
+            </form>
+            <?php
+            if (isset($_GET['customDir'])) {
+                $customDir = rtrim($_GET['customDir'], '/') . '/';
+                if (is_dir($customDir)) {
+                    $customFiles = array_diff(scandir($customDir), array('.', '..'));
+                    echo '<ul class="list-group list-group-flush">';
+                    foreach ($customFiles as $file) {
+                        echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+                        echo '<a href="?customDir=' . urlencode($customDir) . '&customFile=' . urlencode($file) . '">' . htmlspecialchars($file) . '</a>';
+                        echo ' (大小: ' . formatSize(filesize($customDir . $file)) . ')';
+                        echo '</li>';
+                    }
+                    echo '</ul>';
+                } else {
+                    echo '<div class="alert alert-danger" role="alert">目录不存在！</div>';
+                }
+            }
+            ?>
+            <?php if (isset($fileContent)): ?>
+                <?php $fileToEdit = ($_POST['fileType'] === 'proxy') ? $uploadDir . basename($_POST['editFile']) : $configDir . basename($_POST['editFile']); ?>
+                <h2 style="color: #00FF7F;">编辑文件: <?php echo $editingFileName; ?></h2>
+                <p>最后更新日期: <?php echo date('Y-m-d H:i:s', filemtime($fileToEdit)); ?></p>
+                <form action="" method="post">
+                    <textarea name="saveContent" rows="15" cols="150" class="editor"><?php echo $fileContent; ?></textarea><br>
+                    <input type="hidden" name="fileName" value="<?php echo htmlspecialchars($_POST['editFile']); ?>">
+                    <input type="hidden" name="fileType" value="<?php echo htmlspecialchars($_POST['fileType']); ?>">
+                    <input type="submit" value="保存内容">
+                </form>
+            <?php endif; ?>
+        </section>
+        <section id="subscription-management" class="section-gap">
+            <h2 class="text-success">订阅管理</h2>
+            <p class="help-text">在这里，你可以更新每个订阅链接不要修改默认名字。填写完毕后，点击“更新配置”按钮进行更新。</p>
+            <div class="form-spacing"></div>
+            <?php if ($message): ?>
+                <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
+            <?php endif; ?>
+            <?php for ($i = 0; $i < 7; $i++): ?>
+                <form method="post" class="mb-3">
+                    <div class="input-group">
+                        <label for="subscription_url_<?php echo $i; ?>" class="sr-only">订阅链接 <?php echo ($i + 1); ?>:</label>
+                        <input type="text" name="subscription_url" id="subscription_url_<?php echo $i; ?>" value="<?php echo htmlspecialchars($subscriptions[$i]['url']); ?>" required class="form-control">
+                        <input type="text" name="custom_file_name" id="custom_file_name_<?php echo $i; ?>" value="<?php echo htmlspecialchars($subscriptions[$i]['file_name']); ?>" class="form-control ml-2" placeholder="自定义文件名">
+                        <input type="hidden" name="index" value="<?php echo $i; ?>">
+                        <button type="submit" name="update" class="btn btn-primary btn-custom ml-2">更新配置</button>
+                    </div>
+                </form>
+            <?php endfor; ?>
+        </section>
+
+        <section id="base64-conversion" class="section-gap">
+            <h2 class="text-success">Base64 节点信息转换</h2>
+            <form method="post">
+                <div class="input-group form-spacing">
+                    <label for="base64_content" class="sr-only">Base64 内容:</label>
+                    <textarea name="base64_content" id="base64_content" rows="4" class="form-control" required></textarea>
+                    <button type="submit" name="convert_base64" class="btn btn-primary btn-custom ml-2">生成节点信息</button>
+                </div>
+            </form>
+        </section>
+        <h1 style="color: #00FF7F;">节点转换工具</h1>
+        <form method="post">
+            <textarea name="input" rows="10" cols="50" placeholder="粘贴 ss//vless//vmess//trojan//hysteria2 节点信息..."></textarea>
+            <button type="submit" name="convert">转换</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>
