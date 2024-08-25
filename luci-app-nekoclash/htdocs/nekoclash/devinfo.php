@@ -213,25 +213,6 @@ $cpuFamily = preg_match('/^CPU family:\s+(.+)/m', $cpuInfo, $matches);
     </style>
 </head>
 <body>
-<div id="player" onclick="toggleAnimation()"> 
-    <p id="hidePlayer">Mihomo</p>
-    <p id="timeDisplay">00:00</p>
-    <audio id="audioPlayer" controls>  
-        <source src="" type="audio/mpeg">
-        您的浏览器不支持音频播放。
-    </audio>
-    <br>
-    <div id="controls">
-        <button id="prev" class="rounded-button">⏮️</button>
-        <button id="orderLoop" class="rounded-button">🔁</button>
-        <button id="play" class="rounded-button">⏸️</button>
-        <button id="next" class="rounded-button">⏭️</button> 
-    </div>  
-</div>
-<div id="mobile-controls">
-    <button id="togglePlay" class="rounded-button">播放/暂停</button>
-    <button id="toggleEnable" class="rounded-button">启用/禁用</button>
-</div>
 <div id="tooltip"></div>
 
 <script>
