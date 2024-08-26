@@ -1,5 +1,5 @@
---- a/htdocs/nekoclash/devinfo.php
-+++ b/htdocs/nekoclash/devinfo.php
+--- a/luci-app-nekoclash/htdocs/nekoclash/devinfo.php
++++ b/luci-app-nekoclash/htdocs/nekoclash/devinfo.php
 @@ -75,6 +75,7 @@
          }
  
