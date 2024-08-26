@@ -117,7 +117,7 @@
 
 --- a/luci-app-passwall/luasrc/controller/passwall.lua
 +++ b/luci-app-passwall/luasrc/controller/passwall.lua
-@@ -21,6 +21,7 @@ function index()
+@@ -21,6 +21,9 @@ function index()
  	entry({"admin", "services", appname, "reset_config"}, call("reset_config")).leaf = true
  	entry({"admin", "services", appname, "show"}, call("show_menu")).leaf = true
  	entry({"admin", "services", appname, "hide"}, call("hide_menu")).leaf = true
