@@ -36,3 +36,5 @@ disk="$(lsblk | awk '/disk/ {print $1; exit}')"
 NEWPART $disk
 }
 }
+
+exit 0
