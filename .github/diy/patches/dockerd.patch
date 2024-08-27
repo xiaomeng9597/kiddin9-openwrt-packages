@@ -1,5 +1,5 @@
---- a/dockerd/utils/dockerd/Makefile
-+++ b/dockerd/utils/dockerd/Makefile
+--- a/dockerd/Makefile
++++ b/dockerd/Makefile
 @@ -142,6 +142,9 @@ define Package/dockerd/install
  	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bundles/binary-daemon/dockerd $(1)/usr/bin/
  	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bundles/binary-daemon/docker-proxy $(1)/usr/bin/
