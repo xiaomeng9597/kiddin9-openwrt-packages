@@ -223,6 +223,7 @@ jobs:
         git_clone https://github.com/openwrtdiy/luci-app-pppoe-user
         git_clone https://github.com/derisamedia/luci-theme-alpha
         git_clone https://github.com/animegasan/luci-app-alpha-config
+        git_clone https://github.com/gofly/openwrt-luci-proto-tinc
         ) &
         (
         git clone https://github.com/sirpdboy/luci-theme-kucat -b js --depth 1
@@ -381,6 +382,7 @@ jobs:
         ) &
         (
         git_sparse_clone master "https://github.com/x-wrt/com.x-wrt" luci-app-macvlan luci-app-xwan
+        git_sparse_clone master "https://github.com/obsy/packages" oscam luci-proto-wwan
         ) &
         git_sparse_clone master "https://github.com/coolsnowwolf/luci" applications libs/luci-lib-fs
         mv -f applications luciapp
