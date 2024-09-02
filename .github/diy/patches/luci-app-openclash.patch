@@ -6,6 +6,6 @@
  	DEPENDS:=+dnsmasq-full +coreutils +coreutils-nohup +bash +curl +ca-certificates +ipset +ip-full \
 -	+libcap +libcap-bin +ruby +ruby-yaml +kmod-tun +unzip
 +	+libcap +libcap-bin +ruby +ruby-yaml +kmod-tun +unzip \
-+	+kmod-inet-diag +luci-compat \
++	+kmod-inet-diag +luci-compat
  	MAINTAINER:=vernesong
  endef
