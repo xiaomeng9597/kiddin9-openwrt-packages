@@ -300,6 +300,7 @@ jobs:
         git_clone https://github.com/rq1025330/luci-app-virtualhere
         git_clone https://github.com/luochongjun/luci-app-dynv6
         git_clone https://github.com/nicholas9698/luci-app-campusnet
+        git_clone https://github.com/tanghammer/luci-app-switchtools
         ) &
         (
         git_clone https://github.com/jackpang960/luci-app-hypermodem
