@@ -346,7 +346,7 @@ jobs:
         net/uugamebooster net/verysync net/vlmcsd net/dnsforwarder net/tcpping net/netatalk net/pgyvpn
         git_sparse_clone master "https://github.com/openwrt/packages" \
         utils/coremark utils/watchcat utils/dockerd utils/cgroupfs-mount net/uwsgi net/p910nd net/ddns-scripts net/smartdns net/curl \
-        net/ariang net/tailscale yt-dlp
+        net/ariang net/tailscale multimedia/yt-dlp
         ) &
         (
         git_sparse_clone openwrt-23.05 "https://github.com/openwrt/openwrt" \
