@@ -1,3 +1,9 @@
+--- a/luci-app-nekoclash/htdocs/nekoclash/lib/theme.txt
++++ b/luci-app-nekoclash/htdocs/nekoclash/lib/theme.txt
+@@ -1 +1 @@
+-NavajoWhite.css
++light.css
+
 --- a/luci-app-nekoclash/htdocs/nekoclash/index.php
 +++ b/luci-app-nekoclash/htdocs/nekoclash/index.php
 @@ -2,7 +2,6 @@
