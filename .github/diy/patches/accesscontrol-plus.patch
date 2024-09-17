@@ -1,4 +1,4 @@
---- a/luci-app-accesscontrol-plus/po/zh_Hans/miaplus.po
+--- a/luci-app-accesscontrol-plus/po/zh-Hans/miaplus.po
 +++ b/luci-app-accesscontrol-plus/po/zh_Hans/miaplus.po
 @@ -13,6 +13,12 @@ msgstr "严格模式"
  msgid "Strict Mode will degrade CPU performance, but it can achieve better results"
