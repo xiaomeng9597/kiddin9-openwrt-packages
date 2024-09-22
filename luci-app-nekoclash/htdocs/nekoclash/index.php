@@ -326,8 +326,12 @@ $configDir = '/etc/neko/config';
 $start_script_template = <<<EOF
 #!/bin/bash
 
+exec >> $logFile 2>&1  
+exec 2>> $singBoxLogFile  
+
 if command -v fw4 > /dev/null; then
-    echo "Detected fw4, configuring nftables rules..."
+    echo "FW4 Detected."
+    echo "Starting nftables."
 
     echo '#!/usr/sbin/nft -f
 
@@ -394,7 +398,8 @@ table inet singbox {
     nft -f /etc/nftables.conf
 
     elif command -v fw3 > /dev/null; then
-    echo "Detected fw3, configuring iptables rules..."
+    echo "FW3 Detected."
+    echo "Starting iptables."
 
     iptables -t mangle -F
     iptables -t mangle -X
@@ -434,7 +439,8 @@ else
     exit 1
 fi
 
-echo "启动sing-box，使用配置文件：%s"
+echo "Configs : %s"
+exec >> $singBoxLogFile 2>&1  
 /usr/bin/sing-box run -c %s
 EOF;
 
@@ -595,8 +601,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exec("/etc/neko/core/start.sh > $singBoxLogFile 2>&1 &", $output, $returnVar);
             $version = getSingboxVersion();
             $pid = getSingboxPID();
+            $currentTimestamp = date('H:i:s'); 
             $logMessage = $returnVar === 0 
-               ? "Sing-box has been started, version: $version" : "Failed to start Sing-box";      
+                ? "Sing-box started\n[$currentTimestamp] Core Detected : $version" 
+                 : "Failed to start Sing-box\n[$currentTimestamp]";
             logToFile($logFile, $logMessage); 
             $singbox_status = $returnVar === 0 ? 1 : 0;
         } elseif ($_POST['singbox'] === 'disable') {
@@ -770,23 +778,6 @@ $singboxStartLogContent = readLogFile($singboxStartLogFile);
         </tbody>
     </table>
 </div>
-<div class="container container-bg border border-3 rounded-4 col-12 mb-4">
-    <h2 class="text-center p-2" style="margin-top: -15px; margin-bottom: 5px;">语音播报系统</h2>
-    <table class="table table-borderless mb-2" style="margin-bottom: 5px;">
-        <tbody>
-            <tr>
-                <td>
-                    <div class="row mb-2" style="margin-bottom: 5px;">
-                        <div class="col">
-                            <input type="text" id="city-input" class="form-control" placeholder="如 Beijing" style="padding: 5px;">
-                        </div>
-                        <div class="col-auto">
-                            <button onclick="saveCity()" class="btn btn-success" style="padding: 5px 10px;">保存城市</button
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -978,15 +969,13 @@ $singboxStartLogContent = readLogFile($singboxStartLogFile);
         fetchLogs();
         setInterval(fetchLogs, 5000);
     </script>
-
-<div class="container container-bg border border-3 rounded-4 col-12 mb-4 d-flex justify-content-center" style="height: 60px;">
-    <div class="nav-buttons d-flex justify-content-center align-items-center" style="height: 100%;">
-        <a href="/nekoclash/mon.php" class="config-menu-button d-flex justify-content-center align-items-center" style="height: 40px; line-height: 40px; margin-top: -28px;" onclick="speakAndNavigate('打开Mihomo 管理面板', '/nekoclash/mon.php'); return false;">
-            打开Mihomo 管理面板
-        </a>
-    </div>
-</div>
-
+<a href="/nekoclash/mon.php" class="config-menu-button d-flex justify-content-center align-items-center" 
+   style="height: 40px; width: 40px; line-height: 40px; border-radius: 50%; background-color: transparent; border: 5px solid; color: white; position: absolute; top: 20px; left: 20px; text-align: center; text-decoration: none; transition: opacity 0.3s; animation: borderAnimation 3s linear infinite;" 
+   onclick="speakAndNavigate('打开Mihomo 管理面板', '/nekoclash/mon.php'); return false;"
+   onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">
+    <i class="fas fa-cog"></i>
+</a>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
         function speakAndNavigate(message, url) {
             speakMessage(message);
