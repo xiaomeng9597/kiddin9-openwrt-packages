@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>订阅转换模板</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/all.min.css">
     <style>
         body {
@@ -140,22 +140,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generateConfig'])) {
     } elseif ($_POST['templateOption'] === 'default') {
         switch ($_POST['defaultTemplate']) {
             case 'mixed':
-                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_mixed.json");
+                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_1.json");
                 break;
             case 'second':
-                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config.json");
+                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_2.json");
                 break;
             case 'fakeip':
-                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_fakeip.json");
+                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_3.json");
                 break;
             case 'tun':
-                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_tun.json");
+                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_4.json");
                 break;
             case 'ip':
-                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_ip.json");
+                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_5.json");
                 break;
             default:
-                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_mixed.json");
+                $templateUrlEncoded = urlencode("https://raw.githubusercontent.com/Thaolga/Rules/main/Clash/json/config_1.json");
                 break;
         }
     }
@@ -236,9 +236,9 @@ if (file_exists($dataFilePath)) {
 }
             ?>
 
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="./assets/bootstrap/jquery-3.5.1.slim.min.js"></script>
+            <script src="./assets/bootstrap/popper.min.js"></script>
+            <script src="./assets/bootstrap/bootstrap.min.css"></script>
             <script>
                 function copyToClipboard() {
                     const copyText = document.getElementById("configContent");
