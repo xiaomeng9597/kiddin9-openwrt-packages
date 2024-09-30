@@ -6,10 +6,6 @@
 set -o errexit
 set -o pipefail
 
-if grep -q '^darwin*' <<< "$OSTYPE"; then
-	export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$(brew --prefix)/opt/findutils/libexec/gnubin:$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
-fi
-
 export PKG_SOURCE_DATE_EPOCH="$(date "+%s")"
 
 BASE_DIR="$(cd "$(dirname $0)"; pwd)"
@@ -26,7 +22,7 @@ else
 	PKG_VERSION="dev-$PKG_SOURCE_DATE_EPOCH-$(git rev-parse --short HEAD)"
 fi
 
-TEMP_DIR="$(mktemp -d -p $BASE_DIR 2>/dev/null || mktemp -d)"
+TEMP_DIR="$(mktemp -d -p $BASE_DIR)"
 TEMP_PKG_DIR="$TEMP_DIR/$PKG_NAME"
 mkdir -p "$TEMP_PKG_DIR/CONTROL/"
 mkdir -p "$TEMP_PKG_DIR/lib/upgrade/keep.d/"
@@ -47,7 +43,7 @@ EOF
 cat > "$TEMP_PKG_DIR/CONTROL/control" <<-EOF
 	Package: $PKG_NAME
 	Version: $PKG_VERSION
-	Depends: libc, sing-box, chinadns-ng, firewall4, kmod-nft-tproxy, unzip
+	Depends: libc, sing-box, chinadns-ng, firewall4, kmod-nft-tproxy
 	Source: https://github.com/immortalwrt/homeproxy
 	SourceName: $PKG_NAME
 	Section: luci
@@ -57,6 +53,17 @@ cat > "$TEMP_PKG_DIR/CONTROL/control" <<-EOF
 	Installed-Size: TO-BE-FILLED-BY-IPKG-BUILD
 	Description:  The modern ImmortalWrt proxy platform for ARM64/AMD64
 EOF
+
+git clone --filter=blob:none --no-checkout "https://github.com/openwrt/luci.git" "po2lmo"
+pushd "po2lmo"
+git config core.sparseCheckout true
+echo "modules/luci-base/src" >> ".git/info/sparse-checkout"
+git checkout
+cd "modules/luci-base/src"
+make po2lmo
+./po2lmo "$PKG_DIR/po/zh_Hans/homeproxy.po" "$TEMP_PKG_DIR/usr/lib/lua/luci/i18n/homeproxy.zh-cn.lmo"
+popd
+rm -rf "po2lmo"
 
 echo -e '#!/bin/sh
 [ "${IPKG_NO_SCRIPT}" = "1" ] && exit 0
